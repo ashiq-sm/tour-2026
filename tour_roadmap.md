@@ -105,13 +105,15 @@
 
 ---
 
-## 📞 Key Emergency Contacts
-* **National Emergency Service:** 999
-* **Tourist Police Helpline:** +880 1320-160160 (Cox's Bazar & Saint Martin zone)
-* **Coast Guard Saint Martin Station:** +880 1769-440999
-* **Lama Thana Police (Mirinja):** +880 1320-108250
+## 📞 Key Emergency Contacts (Verified Official)
+* **National Emergency Service:** `999` *(Health `16263` · Fire `102` · Women/Children `109` · Disaster Warning `1090`)*
+* **Tourist Police Helpline:** `+880 1320-222222` *(Cox's Bazar Region: `+880 1320-158995`)*
+* **Coast Guard Emergency:** `16111` *(BCG Station Saint Martin: `+880 1769-442220`)*
+* **Lama Thana (Mirinja):** OC `+880 1320-110580` · Duty Officer `+880 1320-110585`
+* **Cox's Bazar Sadar Thana:** OC `+880 1320-108471` · Control Room `+880 1320-109398`
+* **Chakaria Thana:** OC `+880 1320-108575`
 
 ---
 
 ## 👨‍💻 Compiled By
-* [**SM Ashikur Rahman**](https://ashiq-sm.github.io/portfolio) · SUST GEB · [BioNotes](https://sm-nextgen-bionotes.vercel.app/) · [WhatsApp](https://wa.me/+8801773971905)
+* [**SM Ashikur Rahman**](https://ashiq-sm.github.io/portfolio) · SUST GEB · [BioNotes](https://sm-nextgen-bionotes.vercel.app/) · [ReportBook](https://report-book-app.pages.dev/#) · [WhatsApp](https://wa.me/+8801773971905)
