@@ -19,6 +19,20 @@
   let isSettingsOpen = $state(false);
   let liveViewerCount = $state(18);
 
+  // Floating thumb scroll-nav indicators
+  let showScrollNav = $state(false);
+  let canScrollUp = $state(false);
+  let canScrollDown = $state(true);
+  let scrollNavTimer = null;
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function scrollToBottom() {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+  }
+
   // App settings state
   let appSettings = $state({
     fontSize: 'normal',
@@ -185,6 +199,21 @@
         requestAnimationFrame(updateActiveSpot);
         ticking = true;
       }
+
+      // Check vertical scroll positions
+      const scrollY = window.scrollY || window.pageYOffset;
+      const maxScroll = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+
+      canScrollUp = scrollY > 120;
+      canScrollDown = scrollY < maxScroll - 120;
+
+      // Show floating thumb buttons on scroll
+      showScrollNav = true;
+      if (scrollNavTimer) clearTimeout(scrollNavTimer);
+      // Auto fade away after 2.2 seconds of inactivity
+      scrollNavTimer = setTimeout(() => {
+        showScrollNav = false;
+      }, 2200);
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -563,6 +592,35 @@
 {#if toastVisible}
   <div class="share-toast">লিংক কপি হয়েছে! সবার সাথে শেয়ার করুন।</div>
 {/if}
+
+<!-- Floating Thumb Scroll Navigation (Top & Bottom, near thumb/hand, auto-fading) -->
+<div class="floating-scroll-nav {showScrollNav ? 'visible' : ''}" role="region" aria-label="Quick scroll navigation">
+  {#if canScrollUp}
+    <button
+      class="scroll-nav-btn scroll-up-btn"
+      onclick={scrollToTop}
+      title="এক ক্লিকে উপরে যান (Scroll to Top)"
+      aria-label="Scroll to Top"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"/>
+      </svg>
+    </button>
+  {/if}
+
+  {#if canScrollDown}
+    <button
+      class="scroll-nav-btn scroll-down-btn"
+      onclick={scrollToBottom}
+      title="এক ক্লিকে নিচে যান (Scroll to Bottom)"
+      aria-label="Scroll to Bottom"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+  {/if}
+</div>
 
 <InstallPrompt />
 
