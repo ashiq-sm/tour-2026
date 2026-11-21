@@ -1,9 +1,13 @@
-const CACHE_NAME = 'studytour-v12';
+const CACHE_NAME = 'studytour-v13';
 const PRECACHE = [
   '/tour-2026/',
   '/tour-2026/index.html',
   '/tour-2026/manifest.json',
   '/tour-2026/noorehuda.ttf',
+  '/tour-2026/logo.svg',
+  '/tour-2026/favicon.ico',
+  '/tour-2026/favicon-32.png',
+  '/tour-2026/favicon-64.png',
   '/tour-2026/icon-192.png',
   '/tour-2026/icon-512.png',
   '/tour-2026/tour_roadmap_mobile.pdf'

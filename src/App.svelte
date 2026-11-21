@@ -171,9 +171,12 @@
 <header>
   <div class="header-bismillah">{tourData.meta.bismillah}</div>
   <div class="header-row">
-    <div>
-      <div class="header-title">🎓 {tourData.meta.title}</div>
-      <div class="header-sub">{tourData.meta.subtitle}</div>
+    <div class="header-brand">
+      <img src="/tour-2026/logo.svg" alt="Tour Logo" class="header-logo" />
+      <div>
+        <div class="header-title">{tourData.meta.title}</div>
+        <div class="header-sub">{tourData.meta.subtitle}</div>
+      </div>
     </div>
     <div class="header-actions">
       <button onclick={shareApp} class="header-icon-btn" title="Share App" aria-label="Share App">

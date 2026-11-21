@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient: Deep Hill Emerald Green to Coral Sea Cyan & Ocean Blue -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c22" />
+      <stop offset="35%" stop-color="#064e3b" />
+      <stop offset="70%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+
+    <!-- Sun / Horizon Glow -->
+    <radialGradient id="sunGlow" cx="50%" cy="46%" r="40%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="1" />
+      <stop offset="25%" stop-color="#f59e0b" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#ea580c" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Hill Gradient (Mirinja Valley) -->
+    <linearGradient id="hillGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="hillGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064e3b" />
+    </linearGradient>
+
+    <!-- Ocean Wave Gradients -->
+    <linearGradient id="waveDeep" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#03456b" />
+    </linearGradient>
+    <linearGradient id="waveMid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+    <linearGradient id="waveFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67e8f9" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <!-- Moon Boat (সাম্পান) Gradients -->
+    <linearGradient id="boatHull" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="25%" stop-color="#1e293b" />
+      <stop offset="70%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <linearGradient id="boatInner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#92400e" />
+      <stop offset="100%" stop-color="#451a03" />
+    </linearGradient>
+    <linearGradient id="boatTrim" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <!-- Mast Flags -->
+    <linearGradient id="flagOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+    <linearGradient id="flagNavy" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="shadowBoat" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#020617" flood-opacity="0.65" />
+    </filter>
+    <filter id="glowSun" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glowWave" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0369a1" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Squircle Base with Rounded Corners for Modern Mobile & Web Icon -->
+  <rect x="8" y="8" width="496" height="496" rx="112" fill="url(#bgGrad)" />
+  <!-- Subtle Inner Border Highlight -->
+  <rect x="8" y="8" width="496" height="496" rx="112" fill="none" stroke="rgba(255, 255, 255, 0.22)" stroke-width="3" />
+
+  <!-- Clip inner content to squircle -->
+  <g clip-path="url(#iconClip)">
+    <clipPath id="iconClip">
+      <rect x="8" y="8" width="496" height="496" rx="112" />
+    </clipPath>
+
+    <!-- Golden Sunset / Dawn Orb in Horizon -->
+    <circle cx="256" cy="235" r="95" fill="url(#sunGlow)" />
+    <circle cx="256" cy="235" r="48" fill="#fef08a" opacity="0.9" filter="url(#glowSun)" />
+
+    <!-- Distant Sea Birds (Seagulls of Bay of Bengal / St. Martin) -->
+    <g fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" opacity="0.8">
+      <path d="M 145 138 Q 155 130 165 138 Q 175 130 185 138" />
+      <path d="M 120 155 Q 128 148 136 155 Q 144 148 152 155" />
+      <path d="M 180 162 Q 186 156 192 162 Q 198 156 204 162" />
+    </g>
+
+    <!-- Mirinja Valley Layered Hills in Distance (Symbolizing Green Hill Journey) -->
+    <path d="M 0 310 Q 110 240 220 280 T 420 260 Q 470 270 512 285 L 512 360 L 0 360 Z" fill="url(#hillGrad2)" opacity="0.65" />
+    <path d="M 0 325 Q 140 270 280 315 T 512 295 L 512 380 L 0 380 Z" fill="url(#hillGrad1)" opacity="0.85" />
+
+    <!-- Ocean Horizon Line / Deep Water -->
+    <rect x="0" y="315" width="512" height="197" fill="url(#waveDeep)" opacity="0.95" />
+
+    <!-- Soft Ocean Shimmer Lines -->
+    <line x1="80" y1="330" x2="160" y2="330" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round" />
+    <line x1="360" y1="332" x2="430" y2="332" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" />
+    <line x1="210" y1="336" x2="310" y2="336" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Iconic Cox's Bazar / Bengal Moon Boat (সাম্পান) -->
+    <g filter="url(#shadowBoat)">
+      <!-- Central Mast & Rigging Rig -->
+      <line x1="242" y1="165" x2="242" y2="295" stroke="#78350f" stroke-width="4.5" stroke-linecap="round" />
+      <line x1="242" y1="175" x2="165" y2="285" stroke="rgba(255,255,255,0.45)" stroke-width="1.8" />
+      <line x1="242" y1="175" x2="340" y2="285" stroke="rgba(255,255,255,0.45)" stroke-width="1.8" />
+
+      <!-- Mast Flags (from t-shirt sample) -->
+      <!-- Orange Pennant -->
+      <polygon points="244,170 272,185 244,200" fill="url(#flagOrange)" />
+      <!-- Navy/Teal Pennant -->
+      <polygon points="238,185 220,198 238,210" fill="url(#flagNavy)" />
+      <!-- Top Flag Mast Charm -->
+      <circle cx="242" cy="165" r="4.5" fill="#fef08a" />
+      <!-- Floral / Flower cluster on mast (traditional sampan decor) -->
+      <circle cx="242" cy="225" r="5" fill="#ffffff" />
+      <circle cx="236" cy="223" r="3.5" fill="#38bdf8" />
+      <circle cx="248" cy="223" r="3.5" fill="#38bdf8" />
+      <circle cx="242" cy="231" r="3.5" fill="#38bdf8" />
+
+      <!-- Inside Deck Opening -->
+      <path d="M 148 290 Q 252 308 356 290 Q 256 322 148 290 Z" fill="url(#boatInner)" />
+
+      <!-- Iconic Crescent Moon Hull (Steep High Prow & Stern Curve) -->
+      <!-- Left prow rises high up to (122, 195), base scoops to (252, 365), right stern rises to (378, 198) -->
+      <path d="M 120 196
+               C 134 265 175 358 252 360
+               C 330 358 370 265 384 196
+               C 372 265 330 340 252 342
+               C 174 340 132 265 120 196 Z"
+            fill="url(#boatHull)" />
+
+      <!-- Boat Outer Sheen & Traditional Prow Trim -->
+      <path d="M 120 196
+               C 134 265 175 358 252 360
+               C 330 358 370 265 384 196"
+            fill="none" stroke="url(#boatTrim)" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Characteristic White / Cyan Decorative Bow Stripe -->
+      <path d="M 130 230 C 160 305 210 338 252 340 C 294 338 344 305 374 230"
+            fill="none" stroke="#38bdf8" stroke-width="2.2" opacity="0.85" />
+
+      <!-- Traditional decorative bows on tips -->
+      <circle cx="120" cy="196" r="4" fill="#f59e0b" />
+      <circle cx="384" cy="196" r="4" fill="#f59e0b" />
+      <!-- Red/White decorative band near prow tip -->
+      <line x1="124" y1="206" x2="132" y2="204" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round" />
+      <line x1="380" y1="206" x2="372" y2="204" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round" />
+    </g>
+
+    <!-- Rolling Ocean Wave Crest 1 (Mid Depth) -->
+    <path d="M -10 365
+             C 80 340 140 375 220 355
+             C 300 335 380 370 450 350
+             C 485 340 515 348 530 355
+             L 530 520 L -10 520 Z"
+          fill="url(#waveMid)" opacity="0.88" filter="url(#glowWave)" />
+
+    <!-- Rolling Ocean Wave Crest 2 (Foreground Vibrant Coral Teal Wave with Surf) -->
+    <path d="M -10 405
+             C 70 380 150 425 245 395
+             C 340 365 410 415 525 385
+             L 525 520 L -10 520 Z"
+          fill="url(#waveFront)" />
+
+    <!-- Wave White Foam / Surf Lines -->
+    <path d="M 0 408
+             C 75 383 152 427 245 397
+             C 338 367 410 417 518 387"
+          fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.95" />
+    <path d="M 60 424
+             C 120 405 180 435 270 412
+             C 360 388 440 430 512 410"
+          fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M 120 448
+             C 200 432 290 455 380 435
+             C 430 424 480 440 512 432"
+          fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round" />
+
+    <!-- Golden Sparkles / Bioluminescence on Water Surface -->
+    <circle cx="210" cy="425" r="2" fill="#ffffff" />
+    <circle cx="340" cy="410" r="2.5" fill="#fef08a" />
+    <circle cx="160" cy="460" r="1.8" fill="#ffffff" />
+    <circle cx="290" cy="450" r="2.2" fill="#fef08a" />
+    <circle cx="420" cy="435" r="2" fill="#ffffff" />
+  </g>
+</svg>
