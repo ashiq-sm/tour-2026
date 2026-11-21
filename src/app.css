@@ -454,21 +454,28 @@ header {
   margin-left: 2px;
 }
 .custom-contact-wrap { position: relative; display: flex; align-items: center; }
-.custom-dial-btn { padding-right: 26px; }
-.custom-del-btn {
+.custom-dial-btn { padding-right: 52px; }
+.custom-edit-btn, .custom-del-btn {
   position: absolute;
-  right: 6px;
-  background: rgba(239, 68, 68, 0.15);
-  color: #b91c1c;
   border: none;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+.custom-edit-btn {
+  right: 28px;
+  background: rgba(2, 132, 199, 0.14);
+  color: #0369a1;
+}
+.custom-del-btn {
+  right: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #b91c1c;
 }
 .add-contact-panel {
   margin-top: 12px;

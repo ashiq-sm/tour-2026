@@ -6,6 +6,7 @@
   const STORAGE_KEY = 'tour_custom_contacts_v1';
   let customContacts = $state([]);
   let showAddForm = $state(false);
+  let editingIndex = $state(-1);
   let newName = $state('');
   let newPhone = $state('');
   let importNote = $state('');
@@ -25,10 +26,16 @@
     } catch {}
   }
 
-  function openAddModal(prefillName = '') {
-    newName = prefillName;
-    newPhone = '';
+  function openAddModal(index = -1) {
+    editingIndex = index;
     importNote = '';
+    if (index >= 0 && customContacts[index]) {
+      newName = customContacts[index].name;
+      newPhone = customContacts[index].phone;
+    } else {
+      newName = '';
+      newPhone = '';
+    }
     showAddForm = true;
   }
 
@@ -38,16 +45,15 @@
     const p = newPhone.trim();
     if (!n || !p) return;
 
-    // Replace existing custom entry with same name (e.g. updating তন্ময়) or append
-    const existingIdx = customContacts.findIndex((c) => c.name === n);
-    if (existingIdx >= 0) {
-      customContacts[existingIdx] = { name: n, phone: p };
+    if (editingIndex >= 0 && customContacts[editingIndex]) {
+      customContacts[editingIndex] = { name: n, phone: p };
     } else {
       customContacts = [...customContacts, { name: n, phone: p }];
     }
     persist();
     newName = '';
     newPhone = '';
+    editingIndex = -1;
     showAddForm = false;
   }
 
@@ -74,82 +80,82 @@
       if (added.length) {
         customContacts = [...customContacts, ...added];
         persist();
+        editingIndex = -1;
         showAddForm = false;
       }
     } catch {
       importNote = 'কন্টাক্ট অ্যাক্সেস বাতিল হয়েছে বা সাপোর্ট করছে না; হাতে টাইপ করে যোগ করুন।';
     }
   }
-
-  function getSavedPhone(name) {
-    return customContacts.find((c) => c.name === name)?.phone || '';
-  }
 </script>
 
 <div class="card">
   <div class="contacts-header">
     <div class="card-title" style="margin-bottom: 0;">👥 ট্যুর কোঅর্ডিনেটর ও নিজস্ব নম্বর</div>
-    <button
-      type="button"
-      class="add-contact-pill"
-      onclick={() => openAddModal('')}
-      title="নতুন নম্বর যোগ বা ইমপোর্ট করুন"
-    >
-      ➕ যোগ / ইমপোর্ট
-    </button>
   </div>
 
   <div class="btn-grid">
     {#each coordinators as c}
-      {@const effectivePhone = c.phone || getSavedPhone(c.name)}
-      {#if effectivePhone}
-        <a href="tel:{effectivePhone}" class="action-btn">📞 {c.name}</a>
-      {:else}
-        <button
-          type="button"
-          class="action-btn static-btn"
-          onclick={() => openAddModal(c.name)}
-          title="ট্যাপ করে {c.name}-এর নম্বর যোগ করুন"
-        >
-          👤 {c.name} <span class="mini-plus">+</span>
-        </button>
-      {/if}
+      <a href="tel:{c.phone}" class="action-btn">📞 {c.name}</a>
     {/each}
 
-    {#each customContacts.filter((cc) => !coordinators.some((c) => c.name === cc.name)) as custom, idx}
+    {#each customContacts as custom, idx}
       <div class="custom-contact-wrap">
-        <a href="tel:{custom.phone}" class="action-btn custom-dial-btn">📞 {custom.name}</a>
+        <a href="tel:{custom.phone}" class="action-btn custom-dial-btn" title="{custom.name}: {custom.phone}">
+          📞 {custom.name}
+        </a>
+        <button
+          type="button"
+          class="custom-edit-btn"
+          onclick={() => openAddModal(idx)}
+          title="নাম/নম্বর এডিট করুন"
+          aria-label="Edit {custom.name}"
+        >
+          ✎
+        </button>
         <button
           type="button"
           class="custom-del-btn"
-          onclick={() => removeCustom(customContacts.indexOf(custom))}
+          onclick={() => removeCustom(idx)}
+          title="মুছুন"
           aria-label="Remove {custom.name}"
         >
           ×
         </button>
       </div>
     {/each}
+
+    <button
+      type="button"
+      class="action-btn static-btn"
+      onclick={() => openAddModal(-1)}
+      title="ফোন থেকে ইমপোর্ট বা নাম ও নম্বর যোগ করুন"
+    >
+      ➕ নাম ও নম্বর
+    </button>
   </div>
 
   {#if showAddForm}
     <div class="add-contact-panel">
       <div class="panel-top">
-        <strong>নম্বর যোগ বা ফোন থেকে ইমপোর্ট করুন</strong>
+        <strong>{editingIndex >= 0 ? 'নাম ও নম্বর পরিবর্তন করুন' : 'নাম ও নম্বর যোগ / ইমপোর্ট'}</strong>
         <button type="button" class="panel-close" onclick={() => { showAddForm = false; }}>✕</button>
       </div>
 
-      <button type="button" class="import-phone-btn" onclick={importFromPhone}>
-        📱 ফোনের কন্টাক্ট থেকে ইমপোর্ট করুন
-      </button>
-      {#if importNote}
-        <div class="import-note">{importNote}</div>
+      {#if editingIndex < 0}
+        <button type="button" class="import-phone-btn" onclick={importFromPhone}>
+          📱 ফোনের কন্টাক্ট থেকে ইমপোর্ট করুন
+        </button>
+        {#if importNote}
+          <div class="import-note">{importNote}</div>
+        {/if}
       {/if}
 
       <form class="manual-contact-form" onsubmit={saveContact}>
         <input
           type="text"
           bind:value={newName}
-          placeholder="নাম (যেমন: তন্ময় / রুমমেট)"
+          placeholder="নাম (যেমন: তন্ময় / বন্ধু / স্যার)"
           required
         />
         <input
@@ -158,7 +164,9 @@
           placeholder="ফোন নম্বর (যেমন: 017...)"
           required
         />
-        <button type="submit" class="save-contact-btn">সেভ করুন</button>
+        <button type="submit" class="save-contact-btn">
+          {editingIndex >= 0 ? 'আপডেট করুন' : 'সেভ করুন'}
+        </button>
       </form>
     </div>
   {/if}
