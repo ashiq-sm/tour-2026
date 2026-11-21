@@ -10,6 +10,7 @@
   import AuthorPortal from './components/AuthorPortal.svelte';
   import InstallPrompt from './components/InstallPrompt.svelte';
   import SettingsModal from './components/SettingsModal.svelte';
+  import { initMobileLongPressTooltips } from './utils/mobileTooltip';
 
   let activeSpotId = $state(tourData.spots[0]?.id || 'sylhet');
   let loadedSpotIds = $state(new Set([tourData.spots[0]?.id || 'sylhet', tourData.spots[1]?.id || 'mirinja']));
@@ -190,6 +191,9 @@
     window.addEventListener('resize', onScroll, { passive: true });
     updateActiveSpot();
 
+    // Initialize global mobile long-press tooltip system
+    const cleanupTooltips = initMobileLongPressTooltips();
+
     // Softly cycle green/water landscape photos within the active spot every 6s
     const cycleTimer = setInterval(() => {
       const spot = tourData.spots.find((s) => s.id === activeSpotId);
@@ -203,6 +207,7 @@
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       clearInterval(cycleTimer);
+      if (cleanupTooltips) cleanupTooltips();
     };
   });
 </script>

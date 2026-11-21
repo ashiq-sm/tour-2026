@@ -224,6 +224,36 @@ header {
   white-space: nowrap;
 }
 
+/* Universal Mobile Long-Press / Touch Tooltip Overlay */
+.mobile-touch-tooltip {
+  position: fixed;
+  z-index: 10005;
+  background: rgba(3, 19, 34, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #f0fdf4;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), 0 0 12px rgba(56, 189, 248, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.95);
+  transition: opacity 0.18s ease-out, transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 260px;
+  text-align: center;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.mobile-touch-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .container { max-width: 650px; margin: 0 auto; padding: 14px 10px; }
 
 /* Collapsible Card Structure */
