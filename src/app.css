@@ -95,80 +95,103 @@ body {
 
 /* Sticky Frosted Header */
 header {
-  background: rgba(3, 19, 34, 0.64);
+  background: rgba(3, 19, 34, 0.78);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   color: white;
-  padding: 10px 16px 12px;
+  padding: 6px 10px 8px;
   position: sticky;
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 .header-bismillah {
   font-family: 'Noorehuda', serif;
-  font-size: 1.55rem;
-  line-height: 1.6;
+  font-size: 1.35rem;
+  line-height: 1.4;
   color: #4ade80;
   text-align: center;
-  text-shadow: 0 0 14px rgba(74, 222, 128, 0.35);
-  margin-bottom: 4px;
+  text-shadow: 0 0 12px rgba(74, 222, 128, 0.35);
+  margin-bottom: 3px;
   direction: rtl;
 }
 .header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
+  min-width: 0;
 }
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 .header-logo {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.3);
   flex-shrink: 0;
   display: block;
 }
-.header-title { font-size: 1.08rem; font-weight: 800; letter-spacing: -0.3px; }
-.header-sub { font-size: 0.75rem; color: #cbd5e1; }
-.header-actions { display: flex; align-items: center; gap: 5px; }
+.header-title {
+  font-size: 0.94rem;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+.header-sub {
+  font-size: 0.68rem;
+  color: #cbd5e1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
 
 /* Live Viewer Pill (Glowing animated green dot + user group icon, no text) */
 .live-viewer-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  background: rgba(16, 185, 129, 0.18);
-  border: 1px solid rgba(52, 211, 153, 0.45);
-  height: 32px;
-  padding: 0 8px;
-  border-radius: 18px;
+  gap: 3px;
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 14px;
   color: #34d399;
   cursor: default;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
   flex-shrink: 0;
 }
 
 .live-pulse-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background-color: #10b981;
   border-radius: 50%;
-  box-shadow: 0 0 8px #10b981;
+  box-shadow: 0 0 6px #10b981;
   animation: livePulse 1.8s infinite ease-in-out;
 }
 
 @keyframes livePulse {
   0% { transform: scale(0.9); opacity: 0.7; }
-  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #34d399; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 10px #34d399; }
   100% { transform: scale(0.9); opacity: 0.7; }
 }
 
@@ -180,16 +203,17 @@ header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 33px;
-  height: 33px;
+  width: 29px;
+  height: 29px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.26);
   color: white;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   transition: all 0.15s ease;
   flex-shrink: 0;
+  padding: 0;
 }
 
 .header-icon-btn:hover {
@@ -211,17 +235,48 @@ header {
 .quick-pdf-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
   background: linear-gradient(135deg, var(--primary), #0284c7);
   color: white;
-  padding: 7px 13px;
-  border-radius: 24px;
-  font-size: 0.78rem;
+  padding: 4px 8px;
+  border-radius: 18px;
+  font-size: 0.72rem;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 4px 14px var(--primary-glow);
+  box-shadow: 0 2px 10px var(--primary-glow);
   border: 1px solid rgba(255, 255, 255, 0.28);
   white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Mobile Responsiveness for small phone screens (<= 380px) */
+@media (max-width: 380px) {
+  header {
+    padding: 5px 6px 6px;
+  }
+  .header-bismillah {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+  }
+  .header-title {
+    font-size: 0.85rem;
+  }
+  .header-sub {
+    font-size: 0.62rem;
+  }
+  .header-icon-btn {
+    width: 27px;
+    height: 27px;
+    font-size: 0.78rem;
+  }
+  .live-viewer-pill {
+    height: 26px;
+    padding: 0 4px;
+  }
+  .quick-pdf-btn {
+    padding: 3px 6px;
+    font-size: 0.68rem;
+  }
 }
 
 /* Universal Mobile Long-Press / Touch Tooltip Overlay */
