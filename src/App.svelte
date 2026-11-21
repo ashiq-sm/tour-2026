@@ -2,6 +2,8 @@
   import { onMount } from 'svelte';
   import tourData from './data/tourData.json';
   import DuaCarousel from './components/DuaCarousel.svelte';
+  import RemindersCard from './components/RemindersCard.svelte';
+  import TipsCard from './components/TipsCard.svelte';
   import SpotCard from './components/SpotCard.svelte';
   import Checklist from './components/Checklist.svelte';
   import ContactsGrid from './components/ContactsGrid.svelte';
@@ -135,6 +137,8 @@
 <main class="container">
   <DuaCarousel duas={tourData.duas} />
 
+  <RemindersCard reminders={tourData.reminders} />
+
   <!-- Critical Alerts Card -->
   <div class="card alert-card">
     <div class="card-title alert-title">⚠️ নোটিশ বোর্ডের জরুরি কড়া নির্দেশনা</div>
@@ -161,6 +165,8 @@
       <SpotCard {spot} isLast={i === tourData.spots.length - 1} />
     {/each}
   </div>
+
+  <TipsCard tips={tourData.tips} />
 
   <Checklist items={tourData.checklist} />
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytour-v9';
+const CACHE_NAME = 'studytour-v10';
 const PRECACHE = [
   '/tour-2026/',
   '/tour-2026/index.html',
