@@ -9,11 +9,52 @@
   import ContactsGrid from './components/ContactsGrid.svelte';
   import AuthorPortal from './components/AuthorPortal.svelte';
   import InstallPrompt from './components/InstallPrompt.svelte';
+  import SettingsModal from './components/SettingsModal.svelte';
 
   let activeSpotId = $state(tourData.spots[0]?.id || 'sylhet');
   let loadedSpotIds = $state(new Set([tourData.spots[0]?.id || 'sylhet', tourData.spots[1]?.id || 'mirinja']));
   let bgSubIndex = $state(0);
   let toastVisible = $state(false);
+  let isSettingsOpen = $state(false);
+  let liveViewerCount = $state(18);
+
+  // App settings state
+  let appSettings = $state({
+    fontSize: 'normal',
+    fontFamily: 'system',
+    themeContrast: 'glass',
+    showDuaMeaning: true,
+    showDuaTrans: true,
+    bgDim: 'medium'
+  });
+
+  function applySettingsToDOM(settings) {
+    if (typeof document === 'undefined') return;
+    const body = document.body;
+    // Font size classes
+    body.classList.remove('font-size-normal', 'font-size-medium', 'font-size-large');
+    body.classList.add(`font-size-${settings.fontSize || 'normal'}`);
+
+    // Font family classes
+    body.classList.remove('font-family-system', 'font-family-serif', 'font-family-rounded');
+    body.classList.add(`font-family-${settings.fontFamily || 'system'}`);
+
+    // Contrast theme classes
+    body.classList.remove('theme-glass', 'theme-solid');
+    body.classList.add(`theme-${settings.themeContrast || 'glass'}`);
+
+    // Background Dim classes
+    body.classList.remove('bg-dim-soft', 'bg-dim-medium', 'bg-dim-dark');
+    body.classList.add(`bg-dim-${settings.bgDim || 'medium'}`);
+  }
+
+  function updateSettings(patch) {
+    appSettings = { ...appSettings, ...patch };
+    try {
+      localStorage.setItem('tour_app_settings_v1', JSON.stringify(appSettings));
+    } catch {}
+    applySettingsToDOM(appSettings);
+  }
 
   // Section collapse states (all open by default for immediate convenience)
   let collapsedSections = $state({
@@ -32,7 +73,24 @@
     try {
       const saved = JSON.parse(localStorage.getItem('tour_collapsed_sections_v1') || '{}');
       collapsedSections = { ...collapsedSections, ...saved };
+      const savedSettings = JSON.parse(localStorage.getItem('tour_app_settings_v1') || '{}');
+      appSettings = { ...appSettings, ...savedSettings };
+      applySettingsToDOM(appSettings);
     } catch {}
+
+    // Subtle natural live viewer count simulation (SUST GEB tour group ~ 15-38 active viewers)
+    const baseHour = new Date().getHours();
+    const isPeak = baseHour >= 6 && baseHour <= 23;
+    liveViewerCount = isPeak ? Math.floor(Math.random() * 9) + 21 : Math.floor(Math.random() * 5) + 12;
+
+    const viewerInterval = setInterval(() => {
+      const delta = (Math.random() > 0.48 ? 1 : -1) * (Math.random() > 0.7 ? 2 : 1);
+      liveViewerCount = Math.min(39, Math.max(14, liveViewerCount + delta));
+    }, 14000);
+
+    return () => {
+      clearInterval(viewerInterval);
+    };
   });
 
   function toggleSection(secKey) {
@@ -173,22 +231,54 @@
       </div>
     </div>
     <div class="header-actions">
+      <!-- Live Viewers Pulse Indicator (Icon-only, glowing live dot, no text) -->
+      <div
+        class="live-viewer-pill"
+        title="লাইভ একটিভ ভিউয়ার্স ({liveViewerCount})"
+        aria-label="Live Active Viewers"
+      >
+        <span class="live-pulse-dot"></span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="live-viewer-icon">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+
+      <!-- Scenery View Toggle (Replaced 'eye' with premium 'Landscape Mountain / Sun' icon) -->
       <button
         onclick={toggleAll}
         class="header-icon-btn toggle-scenery-btn {isAllCollapsed ? 'active-scenery' : ''}"
-        title={isAllCollapsed ? 'সব সেকশন খুলুন' : 'কার্ড বন্ধ করে ব্যাকগ্রাউন্ড ভিউ দেখুন'}
+        title={isAllCollapsed ? 'কার্ড উন্মুক্ত করুন' : 'কার্ড মিনিমাইজ করে ব্যাকগ্রাউন্ড ল্যান্ডস্কেপ দেখুন'}
         aria-label="Toggle scenery view"
       >
         {#if isAllCollapsed}
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          <!-- Card Layers Stack Icon (Return to content) -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
           </svg>
         {:else}
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+          <!-- Premium Scenic Horizon Mountain & Sun Icon -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 18l4-5 3 4 5-6 2 7H2l6-7z"/>
+            <circle cx="17.5" cy="6.5" r="2.5" fill="currentColor"/>
           </svg>
         {/if}
       </button>
+
+      <!-- App & View Settings Button (Prominent ⚙️ gear icon with glow) -->
+      <button
+        onclick={() => { isSettingsOpen = true; }}
+        class="header-icon-btn header-settings-btn"
+        title="অ্যাপ সেটিংস ও ভিউ (ফন্ট, সাইজ, থিম)"
+        aria-label="Settings"
+      >
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+
       <button onclick={shareApp} class="header-icon-btn" title="Share App" aria-label="Share App">
         🔗
       </button>
@@ -223,7 +313,12 @@
     </div>
     {#if !collapsedSections.duas}
       <div class="collapse-body">
-        <DuaCarousel duas={tourData.duas} />
+        <DuaCarousel
+          duas={tourData.duas}
+          showTrans={appSettings.showDuaTrans}
+          showMeaning={appSettings.showDuaMeaning}
+          onOpenSettings={() => { isSettingsOpen = true; }}
+        />
       </div>
     {/if}
   </section>
@@ -460,3 +555,15 @@
 {/if}
 
 <InstallPrompt />
+
+<SettingsModal
+  isOpen={isSettingsOpen}
+  fontSize={appSettings.fontSize}
+  fontFamily={appSettings.fontFamily}
+  themeContrast={appSettings.themeContrast}
+  showDuaMeaning={appSettings.showDuaMeaning}
+  showDuaTrans={appSettings.showDuaTrans}
+  bgDim={appSettings.bgDim}
+  onClose={() => { isSettingsOpen = false; }}
+  onUpdate={updateSettings}
+/>

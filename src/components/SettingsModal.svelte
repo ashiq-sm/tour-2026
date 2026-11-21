@@ -2,6 +2,7 @@
   let {
     isOpen = false,
     fontSize = 'medium',
+    fontFamily = 'system',
     themeContrast = 'glass',
     showDuaMeaning = true,
     showDuaTrans = true,
@@ -12,6 +13,10 @@
 
   function setFontSize(val) {
     onUpdate({ fontSize: val });
+  }
+
+  function setFontFamily(val) {
+    onUpdate({ fontFamily: val });
   }
 
   function setThemeContrast(val) {
@@ -68,7 +73,33 @@
           <div class="setting-hint">মোবাইলে রোদ বা গাড়িতে ঝাঁকুনির সময় 'বড়' বা 'অনেক বড়' নির্বাচন করুন।</div>
         </div>
 
-        <!-- Readability / Contrast Mode -->
+        <!-- Font Style / Type (Eye friendly Bangla / English fonts) -->
+        <div class="setting-group">
+          <div class="setting-label">📖 ফন্ট স্টাইল (চোখের জন্য আরামদায়ক)</div>
+          <div class="btn-toggle-group">
+            <button
+              class="toggle-opt {fontFamily === 'system' ? 'active' : ''}"
+              onclick={() => setFontFamily('system')}
+            >
+              মডার্ন Sans
+            </button>
+            <button
+              class="toggle-opt {fontFamily === 'serif' ? 'active' : ''}"
+              onclick={() => setFontFamily('serif')}
+            >
+              কালপুরুষ Serif
+            </button>
+            <button
+              class="toggle-opt {fontFamily === 'rounded' ? 'active' : ''}"
+              onclick={() => setFontFamily('rounded')}
+            >
+              সফট Rounded
+            </button>
+          </div>
+          <div class="setting-hint">সহজ পঠনযোগ্যতার জন্য আপনার পছন্দের ফন্ট বেছে নিন।</div>
+        </div>
+
+        <!-- Readability / Contrast Mode (Glass vs Solid High Contrast) -->
         <div class="setting-group">
           <div class="setting-label">🎨 কার্ড রিডেবিলিটি ও থিম স্টাইল</div>
           <div class="btn-toggle-group">
