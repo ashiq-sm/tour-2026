@@ -178,9 +178,7 @@
   }
 </script>
 
-<div class="card reminders-card">
-  <div class="card-title">🔔 রিমাইন্ডার ও স্মার্ট অ্যালার্ট</div>
-
+<div class="reminders-inner">
   {#if upcoming}
     <div class="next-up-banner">
       <div class="next-up-header">
@@ -253,16 +251,17 @@
 {/if}
 
 <style>
-  .reminders-card {
-    border-color: rgba(56, 189, 248, 0.35);
+  .reminders-inner {
+    padding-top: 4px;
   }
 
   .next-up-banner {
-    background: linear-gradient(135deg, rgba(14, 165, 233, 0.22), rgba(3, 105, 161, 0.12));
-    border: 1px solid rgba(56, 189, 248, 0.4);
+    background: linear-gradient(135deg, rgba(224, 242, 254, 0.96), rgba(240, 249, 255, 0.94));
+    border: 1px solid rgba(2, 132, 199, 0.35);
     border-radius: 0.75rem;
     padding: 0.75rem 0.9rem;
     margin-bottom: 0.9rem;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12);
   }
 
   .next-up-header {
@@ -275,47 +274,49 @@
 
   .next-up-label {
     font-size: 0.76rem;
-    color: #38bdf8;
-    font-weight: 700;
+    color: #0369a1;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
 
   .btn-quick-alarm {
-    background: rgba(245, 158, 11, 0.2);
-    border: 1px solid rgba(245, 158, 11, 0.5);
-    color: #fbbf24;
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 0.2rem 0.55rem;
-    border-radius: 0.4rem;
+    background: #f59e0b;
+    border: 1px solid #d97706;
+    color: #78350f;
+    font-size: 0.74rem;
+    font-weight: 800;
+    padding: 0.22rem 0.6rem;
+    border-radius: 0.45rem;
     cursor: pointer;
     transition: all 0.15s ease;
     white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
   }
 
   .btn-quick-alarm:hover {
-    background: rgba(245, 158, 11, 0.35);
+    background: #fbbf24;
     transform: scale(1.02);
   }
 
   .next-up-title {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #f1f5f9;
+    font-size: 0.94rem;
+    font-weight: 800;
+    color: #0f172a;
     margin-bottom: 0.2rem;
   }
 
   .next-up-countdown {
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: #334155;
+    font-weight: 600;
   }
 
   .next-up-countdown span {
-    color: #f59e0b;
-    font-weight: 700;
+    color: #b45309;
+    font-weight: 800;
     font-family: monospace;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
   }
 
   .rem-actions-row {
@@ -329,7 +330,7 @@
     padding: 0.55rem 0.65rem;
     border-radius: 0.55rem;
     font-size: 0.78rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     border: none;
     text-align: center;
@@ -347,32 +348,36 @@
   .rem-btn-primary {
     background: #0284c7;
     color: #ffffff;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
   }
 
   .rem-btn-active {
-    background: rgba(16, 185, 129, 0.2);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.4);
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid rgba(22, 163, 74, 0.4);
+    box-shadow: 0 2px 6px rgba(22, 163, 74, 0.15);
   }
 
   .rem-btn-alarm {
-    background: rgba(245, 158, 11, 0.16);
-    color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.45);
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid rgba(217, 119, 6, 0.4);
+    box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
   }
 
   .rem-btn-alarm:hover {
-    background: rgba(245, 158, 11, 0.28);
+    background: #fde68a;
   }
 
   .rem-btn-cal {
-    background: rgba(255, 255, 255, 0.08);
-    color: #e2e8f0;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #f1f5f9;
+    color: #1e293b;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   }
 
   .rem-btn-cal:hover {
-    background: rgba(255, 255, 255, 0.14);
+    background: #e2e8f0;
   }
 
   .rem-list {
@@ -385,23 +390,24 @@
     display: flex;
     align-items: flex-start;
     gap: 0.65rem;
-    background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 0.55rem 0.7rem;
-    border-radius: 0.55rem;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.65rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     transition: background 0.15s;
   }
 
   .rem-item:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: #ffffff;
   }
 
   .rem-checkbox-label input {
     margin-top: 0.25rem;
-    accent-color: #38bdf8;
+    accent-color: #0284c7;
     cursor: pointer;
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
   }
 
   .rem-info {
@@ -418,44 +424,45 @@
   }
 
   .rem-time {
-    font-size: 0.72rem;
-    color: #38bdf8;
-    font-weight: 700;
+    font-size: 0.74rem;
+    color: #0369a1;
+    font-weight: 800;
   }
 
   .rem-mini-alarm-btn {
-    background: rgba(245, 158, 11, 0.15);
-    border: 1px solid rgba(245, 158, 11, 0.4);
-    color: #fbbf24;
-    font-size: 0.68rem;
-    font-weight: 600;
-    padding: 0.15rem 0.45rem;
+    background: #fef3c7;
+    border: 1px solid #d97706;
+    color: #92400e;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.18rem 0.5rem;
     border-radius: 0.35rem;
     cursor: pointer;
     transition: all 0.15s ease;
   }
 
   .rem-mini-alarm-btn:hover {
-    background: rgba(245, 158, 11, 0.3);
+    background: #fde68a;
     transform: scale(1.04);
   }
 
   .rem-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #f1f5f9;
-    line-height: 1.3;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.32;
   }
 
   .rem-body {
-    font-size: 0.75rem;
-    color: #94a3b8;
+    font-size: 0.78rem;
+    color: #334155;
     margin-top: 0.15rem;
-    line-height: 1.35;
+    line-height: 1.38;
   }
 
   .rem-past {
-    opacity: 0.5;
+    opacity: 0.6;
+    background: rgba(241, 245, 249, 0.75);
   }
 
   .inapp-notif-banner {

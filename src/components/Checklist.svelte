@@ -42,9 +42,7 @@
   }
 </script>
 
-<div class="card">
-  <div class="card-title">🎒 প্যাকিং ও প্রস্তুতি চেকলিস্ট (অফলাইনে সেভ থাকবে)</div>
-
+<div class="checklist-container">
   {#each items as item, idx}
     {@const key = 'base_' + idx}
     {@const val = isChecked(key, item.default)}

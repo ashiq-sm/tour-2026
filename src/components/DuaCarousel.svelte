@@ -52,7 +52,7 @@
 </script>
 
 <div
-  class="card dua-card"
+  class="dua-carousel-wrapper"
   onmouseenter={stopAuto}
   onmouseleave={() => { if (!showInfo) startAuto(); }}
   role="region"
