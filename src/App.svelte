@@ -8,8 +8,20 @@
   import AuthorPortal from './components/AuthorPortal.svelte';
 
   let activeSpotId = $state(tourData.spots[0]?.id || 'sylhet');
+  let loadedSpotIds = $state(new Set([tourData.spots[0]?.id || 'sylhet', tourData.spots[1]?.id || 'mirinja']));
   let bgSubIndex = $state(0);
   let toastVisible = $state(false);
+
+  function markSpotLoaded(spotId) {
+    const idx = tourData.spots.findIndex((s) => s.id === spotId);
+    const nextId = tourData.spots[idx + 1]?.id;
+    if (!loadedSpotIds.has(spotId) || (nextId && !loadedSpotIds.has(nextId))) {
+      const nextSet = new Set(loadedSpotIds);
+      nextSet.add(spotId);
+      if (nextId) nextSet.add(nextId);
+      loadedSpotIds = nextSet;
+    }
+  }
 
   async function shareApp() {
     const url = tourData.meta.liveUrl;
@@ -56,6 +68,7 @@
       if (bestId !== activeSpotId) {
         activeSpotId = bestId;
         bgSubIndex = 0;
+        markSpotLoaded(bestId);
       }
       ticking = false;
     }
@@ -88,14 +101,16 @@
   });
 </script>
 
-<!-- Dynamic Transparent Green & Water Scenic Backgrounds per Spot -->
+<!-- Dynamic Transparent Green & Water Scenic Backgrounds per Spot (Lazy per Spot) -->
 {#each tourData.spots as spot (spot.id)}
-  {#each spot.sceneImgs as img, idx (img)}
-    <div
-      class="bg-scene {activeSpotId === spot.id && (bgSubIndex % spot.sceneImgs.length) === idx ? 'bg-active' : ''}"
-      style="background-image: url('{img}');"
-    ></div>
-  {/each}
+  {#if loadedSpotIds.has(spot.id)}
+    {#each spot.sceneImgs as img, idx (img)}
+      <div
+        class="bg-scene {activeSpotId === spot.id && (bgSubIndex % spot.sceneImgs.length) === idx ? 'bg-active' : ''}"
+        style="background-image: url('{img}');"
+      ></div>
+    {/each}
+  {/if}
 {/each}
 <div id="bg-overlay"></div>
 
