@@ -45,23 +45,17 @@
     } catch {}
   }
 
-  function collapseAll() {
-    const allCollapsed = Object.keys(collapsedSections).reduce((acc, k) => {
-      acc[k] = true;
-      return acc;
-    }, {});
-    collapsedSections = allCollapsed;
-    try {
-      localStorage.setItem('tour_collapsed_sections_v1', JSON.stringify(collapsedSections));
-    } catch {}
-  }
+  let isAllCollapsed = $derived.by(() => {
+    return Object.values(collapsedSections).every((v) => v === true);
+  });
 
-  function expandAll() {
-    const allExpanded = Object.keys(collapsedSections).reduce((acc, k) => {
-      acc[k] = false;
+  function toggleAll() {
+    const nextState = !isAllCollapsed;
+    const updated = Object.keys(collapsedSections).reduce((acc, k) => {
+      acc[k] = nextState;
       return acc;
     }, {});
-    collapsedSections = allExpanded;
+    collapsedSections = updated;
     try {
       localStorage.setItem('tour_collapsed_sections_v1', JSON.stringify(collapsedSections));
     } catch {}
@@ -179,6 +173,22 @@
       </div>
     </div>
     <div class="header-actions">
+      <button
+        onclick={toggleAll}
+        class="header-icon-btn toggle-scenery-btn {isAllCollapsed ? 'active-scenery' : ''}"
+        title={isAllCollapsed ? 'সব সেকশন খুলুন' : 'কার্ড বন্ধ করে ব্যাকগ্রাউন্ড ভিউ দেখুন'}
+        aria-label="Toggle scenery view"
+      >
+        {#if isAllCollapsed}
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+        {:else}
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+        {/if}
+      </button>
       <button onclick={shareApp} class="header-icon-btn" title="Share App" aria-label="Share App">
         🔗
       </button>
@@ -190,20 +200,6 @@
 </header>
 
 <main class="container">
-  <!-- View mode toolbar: allows collapsing sections to enjoy background landscapes -->
-  <div class="view-controls-bar">
-    <div class="view-hint">
-      🌄 ব্যাকগ্রাউন্ড দেখতে সেকশন বন্ধ (Collapse) করুন:
-    </div>
-    <div class="view-btns">
-      <button class="view-toggle-btn" onclick={collapseAll} title="সব সেকশন বন্ধ করুন">
-        🙈 সব বন্ধ (See View)
-      </button>
-      <button class="view-toggle-btn" onclick={expandAll} title="সব সেকশন খুলুন">
-        📖 সব উন্মুক্ত
-      </button>
-    </div>
-  </div>
 
   <!-- Dua Section (Collapsible) -->
   <section class="card-collapsible {collapsedSections.duas ? 'collapsed' : ''}">
@@ -222,7 +218,7 @@
         {#if collapsedSections.duas}
           <span class="collapsed-summary">৫টি দোয়া ও হাদিস</span>
         {/if}
-        <span class="chevron-icon">{collapsedSections.duas ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.duas ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.duas}
@@ -249,7 +245,7 @@
         {#if collapsedSections.reminders}
           <span class="collapsed-summary">ট্রেন, বাস, জাহাজ ও অ্যালার্ম</span>
         {/if}
-        <span class="chevron-icon">{collapsedSections.reminders ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.reminders ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.reminders}
@@ -276,7 +272,7 @@
         {#if collapsedSections.notices}
           <span class="collapsed-summary">বাস ও ট্রেনের সময়, রুট</span>
         {/if}
-        <span class="chevron-icon">{collapsedSections.notices ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.notices ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.notices}
@@ -304,7 +300,7 @@
         <span>📋 ট্যুর কোড অব কন্ডাক্ট (অর্ঘ-এর নির্দেশনা)</span>
       </div>
       <div class="collapse-badge-row">
-        <span class="chevron-icon">{collapsedSections.rules ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.rules ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.rules}
@@ -332,7 +328,7 @@
         {#if collapsedSections.spots}
           <span class="collapsed-summary">সিলেট • মিরিঞ্জা • কক্সবাজার • সেন্টমার্টিন</span>
         {/if}
-        <span class="chevron-icon">{collapsedSections.spots ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.spots ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.spots}
@@ -361,7 +357,7 @@
         {#if collapsedSections.tips}
           <span class="collapsed-summary">৫টি প্রয়োজনীয় টিপস</span>
         {/if}
-        <span class="chevron-icon">{collapsedSections.tips ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.tips ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.tips}
@@ -385,7 +381,7 @@
         <span>🎒 প্যাকিং ও প্রস্তুতি চেকলিস্ট (অফলাইনে সেভ)</span>
       </div>
       <div class="collapse-badge-row">
-        <span class="chevron-icon">{collapsedSections.checklist ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.checklist ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.checklist}
@@ -412,7 +408,7 @@
         {#if collapsedSections.contacts}
           <span class="collapsed-summary">জাহিদ, সাজেদ, ফয়সাল, মুকতাদির, অর্ঘ ও থানা/৯৯৯</span>
         {/if}
-        <span class="chevron-icon">{collapsedSections.contacts ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.contacts ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.contacts}
@@ -436,7 +432,7 @@
         <span>👨‍💻 ডেভেলপার ও প্রজেক্ট পোর্টাল</span>
       </div>
       <div class="collapse-badge-row">
-        <span class="chevron-icon">{collapsedSections.author ? '▼ খুলুন' : '▲ বন্ধ'}</span>
+        <span class="chevron-icon">{collapsedSections.author ? '▼' : '▲'}</span>
       </div>
     </div>
     {#if !collapsedSections.author}
