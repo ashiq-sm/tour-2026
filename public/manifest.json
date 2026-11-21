@@ -1,19 +1,20 @@
 {
   "name": "Study Tour 2026 Roadmap",
   "short_name": "Study Tour",
-  "start_url": "./index.html",
+  "start_url": "/tour-2026/",
+  "scope": "/tour-2026/",
   "display": "standalone",
-  "background_color": "#005580",
-  "theme_color": "#005580",
+  "background_color": "#031322",
+  "theme_color": "#031322",
   "description": "Mirinja, Cox's Bazar & Saint Martin Study Tour Roadmap and Guide",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/tour-2026/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "/tour-2026/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
