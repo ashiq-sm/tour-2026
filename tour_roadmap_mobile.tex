@@ -1,0 +1,258 @@
+\documentclass[11pt]{article}
+\usepackage[paperwidth=108mm, paperheight=192mm, margin=5.5mm, top=6.5mm, bottom=6.5mm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{bengali}
+\setotherlanguage{english}
+\setotherlanguage{arabic}
+
+% Eye-friendly Larger Fonts
+\setmainfont[Script=Bengali]{Kalpurush}
+\newfontfamily\englishfont{DejaVu Sans}
+\newfontfamily\arabicfont[Script=Arabic]{noorehuda}
+
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{titlesec}
+
+% Colors
+\definecolor{primary}{HTML}{005580}
+\definecolor{accent}{HTML}{C2410C}
+\definecolor{danger}{HTML}{B71C1C}
+\definecolor{bgsoft}{HTML}{F8FAFC}
+\definecolor{borderc}{HTML}{CBD5E1}
+\definecolor{islamicgreen}{HTML}{14532D}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    filecolor=primary,
+    urlcolor=primary,
+    citecolor=primary
+}
+
+\tcbset{
+    boxrule=0.7pt,
+    arc=2.5mm,
+    left=2.5mm,
+    right=2.5mm,
+    top=2.5mm,
+    bottom=2.5mm,
+    colback=bgsoft,
+    colframe=borderc
+}
+
+\titleformat{\section}{\large\bfseries\color{primary}}{}{0em}{}[\vspace{-0.3em}\rule{\textwidth}{0.5pt}]
+\titleformat{\subsection}{\normalsize\bfseries\color{accent}}{}{0em}{}
+
+\setlist[itemize]{leftmargin=3.5mm, itemsep=1.3mm, topsep=1mm}
+
+\begin{document}
+
+% Centered Larger Bismillah Header with Noorehuda Font
+\begin{center}
+    {\Large \color{islamicgreen} \textarabic{بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ}}\\[1.8mm]
+    {\Large \textbf{\color{primary} মিরিঞ্জা ভ্যালি, কক্সবাজার ও সেন্টমার্টিন ট্যুর}}\\[0.8mm]
+    {\normalsize \textbf{অফিশিয়াল শিডিউল ও ট্যুর গাইড (৭ রাত ৬ দিন)}}\\[0.6mm]
+    {\scriptsize \color{gray} ২১ নভেম্বর রাত -- ২৮ নভেম্বর ২০২৬ সকাল \quad | \quad দল: ৩৭--৪০ জন}
+\end{center}
+
+\vspace{-0.5mm}
+
+% Safar Dua Box with Centered Larger Noorehuda Arabic
+\begin{tcolorbox}[colframe=islamicgreen, colback=white, coltitle=white, title=\textbf{সফরের দোয়া (হিসনুল মুসলিম)}]
+\begin{center}
+\small\textbf{বাহনে আরোহণের পর পড়ার দোয়া:}\\[1.5mm]
+{\large \color{islamicgreen} \textarabic{سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ}}
+\end{center}
+
+\vspace{0.5mm}
+\small
+\textbf{উচ্চারণ:} সুবহানাল্লাজি সাখখারা লানা হাজা, ওয়া মা কুন্না লাহু মুকরিনিন। ওয়া ইন্না ইলা রাব্বিনা লামুনকালিবুন।
+
+\vspace{0.8mm}
+\textbf{অর্থ:} ``পবিত্র সেই সত্তা, যিনি একে আমাদের বশীভূত করে দিয়েছেন, অথচ আমরা একে বশে আনতে সক্ষম ছিলাম না। আর নিশ্চয়ই আমরা আমাদের প্রতিপালকের নিকট প্রত্যাবর্তনকারী।''\\[1.2mm]
+\href{https://dua.gtaf.org/bn/travel/all/}{\color{islamicgreen}\textbf{[GTAF হিসনুল মুসলিম: সফরের সকল দোয়া $\rightarrow$]}}
+\end{tcolorbox}
+
+\vspace{-0.5mm}
+
+\begin{tcolorbox}[colframe=danger, colback=white, coltitle=white, title=\textbf{নোটিশ বোর্ডের জরুরি নির্দেশনা ও সতর্কতা}]
+\small
+\begin{itemize}
+    \item \textbf{বাস ছাড়ার সময়:} \textbf{রাত ৮:৩০-এ ভার্সিটি গেট থেকে বাস ছাড়বে।} বাস ঠিক সময়ে ছাড়বে, কেউ লেট করলে নিজ দায়িত্বে স্টেশনে যেতে হবে (ট্রেন অপেক্ষা করবে না)।
+    \item \textbf{সেন্টমার্টিন রাত্রিযাপন:} ২৭ অক্টোবরের প্রজ্ঞাপন অনুযায়ী নভেম্বর থেকেই দ্বীপে রাত্রিযাপন অনুমোদিত।
+    \item \textbf{জাহাজ ঘাট:} টেকনাফ রুট বন্ধ। জাহাজ ছাড়বে কক্সবাজারের \href{https://maps.google.com/?q=BIWTA+Ghat+Nuniachhara+Coxs+Bazar}{\textbf{নুনিয়াছড়া বিআইডব্লিউটিএ ঘাট}} থেকে (সকাল ৬:০০ টায় হোটেল থেকে রওনা)।
+    \item \textbf{ট্রাভেল পাস ও ফি:} সবার মোবাইলে \textbf{অনলাইন QR ট্রাভেল পাস} ও ১০০ টাকা পরিবেশ ফি রসিদ থাকা বাধ্যতামূলক।
+    \item \textbf{আইডি কার্ড:} চেকপোস্টে যাচাইয়ের জন্য \textbf{NID/পাসপোর্ট/জন্ম সনদের ফটোকপি ও আসল স্টুডেন্ট আইডি} সাথে রাখুন।
+\end{itemize}
+\end{tcolorbox}
+
+\newpage
+
+\section*{ট্যুর নিয়মাবলী: Do's \& Don'ts}
+\begin{tcolorbox}[colframe=primary, colback=white, title=\textbf{অবশ্যই পালনীয় (Do's)}]
+\small
+\begin{itemize}
+    \item \textbf{শিডিউল মেনে চলুন:} নির্ধারিত সময় কঠোরভাবে মেনে চলুন; অহেতুক সময় নষ্ট করবেন না।
+    \item \textbf{জানিয়ে বের হন:} কাউকে অথবা সম্মানিত শিক্ষককে না জানিয়ে কখনো একা কোথাও যাবেন না।
+    \item \textbf{ব্যাগ হালকা রাখুন:} পাহাড়ে ট্র্যাকিং ও জাহাজে চলাচলের সুবিধার্থে ব্যাগ হালকা রাখুন।
+    \item \textbf{সাথে পানি ও জরুরি টাকা:} ব্যাকপ্যাকে খাবার পানি এবং ইমার্জেন্সির জন্য ৳৩,০০০--৪,০০০ ক্যাশ রাখুন।
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{1mm}
+\begin{tcolorbox}[colframe=danger, colback=white, title=\textbf{যা একদমই করবেন না (Don'ts)}]
+\small
+\begin{itemize}
+    \item \textbf{নো হাই হিল (No High Heels):} পাহাড়ি রাস্তা ও প্রবালে হাঁটতে হবে; হিল পরলে গোড়ালি মচকে যাওয়ার ঝুঁকি রয়েছে।
+    \item \textbf{দৃষ্টি আকর্ষণ নয়:} অপ্রীতিকর পরিস্থিতি তৈরি হয় বা ট্যুরের পরিবেশ ব্যাহত হয় এমন কিছু করবেন না।
+    \item \textbf{পরিবেশ নীতি:} পলিথিন বহন নিষেধ। রাতে দ্বীপে উচ্চশব্দে বক্স বাজানো ও তীব্র আলো নিষিদ্ধ।
+\end{itemize}
+\end{tcolorbox}
+
+\newpage
+
+\section*{লাইভ বাংলাদেশ আবহাওয়া ও রাডার}
+\small
+\begin{itemize}
+    \item \href{https://www.google.com/search?q=weather+Lama+Bandarban+Bangladesh}{\color{primary}[গুগল ওয়েদার: মিরিঞ্জা ভ্যালি / লামা]}
+    \item \href{https://www.google.com/search?q=weather+Coxs+Bazar+Bangladesh}{\color{primary}[গুগল ওয়েদার: কক্সবাজার সমুদ্র সৈকত]}
+    \item \href{https://www.google.com/search?q=weather+Saint+Martin+Island+Bangladesh}{\color{primary}[গুগল ওয়েদার: সেন্টমার্টিন দ্বীপ]}
+    \item \href{https://www.google.com/search?q=weather+Chittagong+Bangladesh}{\color{primary}[গুগল ওয়েদার: চট্টগ্রাম শহর]}
+    \item \href{http://live4.bmd.gov.bd/}{\color{primary}[বাংলাদেশ আবহাওয়া অধিদপ্তর (BMD) বুলেটিন]}
+\end{itemize}
+
+\vspace{1mm}
+\section*{ট্যুর কোঅর্ডিনেটর ও টিম লিডস}
+\small
+\begin{itemize}
+    \item \textbf{জাহিদ:} \href{tel:01707226697}{01707-226697}
+    \item \textbf{সাজেদ:} \href{tel:+8801886373999}{01886-373999} \quad (\href{https://t.me/sajed_imran}{@sajed\_imran})
+    \item \textbf{ফয়সাল:} \href{tel:01518904986}{01518-904986}
+    \item \textbf{মুকতাদির:} \href{tel:+8801872959460}{01872-959460} \quad (\href{https://t.me/Muktadir13}{@Muktadir13})
+    \item \textbf{অর্ঘ:} \href{tel:+8801839903963}{01839-903963} \quad (\href{https://t.me/ArghaKanungo}{@ArghaKanungo})
+    \item \textbf{তন্ময়}
+    \item \textbf{জরুরি সেবা:} \href{tel:999}{৯৯৯} $\cdot$ ট্যুরিস্ট পুলিশ: \href{tel:+8801320160160}{01320-160160} $\cdot$ কোস্টগার্ড: \href{tel:+8801769440999}{01769-440999}
+\end{itemize}
+
+\newpage
+
+\section*{অফিশিয়াল ট্যুর শিডিউল ও সময়সূচি}
+
+\subsection*{২১ নভেম্বর (শনিবার রাত): সিলেট থেকে যাত্রা}
+\begin{itemize}
+    \item \textbf{স্থান:} \textbf{ভার্সিটি গেট (SUST Main Gate)}
+    \item \textbf{রাত ৮:৩০:} বাস ছাড়বে (লেট করলে নিজ দায়িত্বে স্টেশনে যেতে হবে)।
+    \item \textbf{রাত ১০:০০:} সিলেট রেলস্টেশন থেকে \textbf{উদয়ন এক্সপ্রেস} ট্রেন ছাড়বে।
+    \item \textbf{আবহাওয়া:} [২২$^\circ$--২৬$^\circ$সে.], আংশিক মেঘলা।
+    \item \href{https://maps.google.com/?q=Sylhet+Railway+Station}{\color{primary}[Google Map: সিলেট রেলওয়ে স্টেশন]}
+\end{itemize}
+
+\subsection*{২২ নভেম্বর (রবিবার): চট্টগ্রাম $\rightarrow$ মিরিঞ্জা ভ্যালি}
+\begin{itemize}
+    \item \textbf{সকাল ৬:৩০--৭:০০:} চট্টগ্রাম পৌঁছানো (ইনশাআল্লাহ) $\rightarrow$ \textbf{৭:০০--৮:০০:} নাস্তা।
+    \item \textbf{সকাল ৮:০০:} চকরিয়া/মিরিঞ্জার উদ্দেশ্যে বাস ছাড়বে $\rightarrow$ \textbf{দুপুর ১২:০০:} রিসোর্টে চেক-ইন।
+    \item \textbf{কার্যক্রম:} মেঘের ভেলা, পাহাড়ি প্রকৃতি ও সূর্যাস্ত দর্শন (দুপুর/বিকেল/রাতের খাবার)।
+    \item \textbf{আবহাওয়া:} [২২$^\circ$--২৭$^\circ$সে.], গুঁড়ি গুঁড়ি বৃষ্টি [~১০.৮ মিমি, ৮২\%], পিচ্ছিল ট্রেইল।
+    \item \href{https://maps.google.com/?q=Mirinja+Valley+Lama+Bandarban}{\color{primary}[Google Map: মিরিঞ্জা ভ্যালি, লামা]}
+\end{itemize}
+
+\subsection*{২৩ নভেম্বর (সোমবার): মিরিঞ্জা ভ্যালি $\rightarrow$ কক্সবাজার}
+\begin{itemize}
+    \item \textbf{সকাল:} নাস্তা ও চেক-আউট $\rightarrow$ \textbf{সকাল ১০:৩০:} মিরিঞ্জা থেকে চকরিয়া হয়ে কক্সবাজার যাত্রা।
+    \item \textbf{দুপুর ও বিকেল:} দুপুরের খাবার শেষে \textbf{Hotel Hyperion (সুগন্ধা পয়েন্ট)}-এ ৫টি এসি ফ্ল্যাটে চেক-ইন। সমুদ্রসৈকত ও সূর্যাস্ত দর্শন।
+    \item \textbf{আবহাওয়া:} [২৩$^\circ$--২৮$^\circ$সে.], হালকা বৃষ্টির সম্ভাবনা [~৭.৮ মিমি, ৬৯\%], মৃদু উত্তাল সাগর।
+    \item \href{https://maps.google.com/?q=Hotel+Hyperion+Sugandha+Point+Coxs+Bazar}{\color{primary}[Google Map: হোটেল হাইপেরিয়ন, সুগন্ধা পয়েন্ট]}
+\end{itemize}
+
+\newpage
+
+\subsection*{২৪ নভেম্বর (মঙ্গলবার): কক্সবাজার $\rightarrow$ সেন্টমার্টিন}
+\begin{itemize}
+    \item \textbf{সকাল ৬:০০:} হোটেল থেকে নুনিয়াছড়া ঘাটে যাত্রা $\rightarrow$ \textbf{সকাল ৭:০০:} জাহাজে সেন্টমার্টিন রওনা।
+    \item \textbf{দুপুর ১:৩০:} দ্বীপে রিসোর্টে চেক-ইন (১০টি ডাবল রুম)। দ্বীপ ও সৈকত ভ্রমণ।
+    \item \textbf{আবহাওয়া:} [২৩$^\circ$--৩০$^\circ$সে.], চমৎকার রোদ [বৃষ্টি ০.০ মিমি, ১৪\%], শান্ত সাগর।
+    \item \href{https://maps.google.com/?q=BIWTA+Ghat+Nuniachhara+Coxs+Bazar}{\color{primary}[Google Map: নুনিয়াছড়া ঘাট]} $\cdot$ \href{https://maps.google.com/?q=Saint+Martin+Island+Bangladesh}{\color{primary}[Google Map: সেন্টমার্টিন]}
+\end{itemize}
+
+\subsection*{২৫ নভেম্বর (বুধবার): সেন্টমার্টিন পূর্ণ দিন}
+\begin{itemize}
+    \item \textbf{দিনব্যাপী:} পূর্ব বিচে সূর্যোদয়, সাইক্লিং, ডাব ও সামুদ্রিক মাছের স্বাদ, পশ্চিম বিচে সূর্যাস্ত। (ছেঁড়াদ্বীপ নিষিদ্ধ)।
+    \item \textbf{আবহাওয়া:} [২২$^\circ$--২৯$^\circ$সে.], পরিষ্কার আকাশ [বৃষ্টি ০.০ মিমি], রাতে ঠান্ডা হাওয়া (২১$^\circ$সে.)।
+\end{itemize}
+
+\subsection*{২৬ নভেম্বর (বৃহস্পতিবার): সেন্টমার্টিন $\rightarrow$ কক্সবাজার}
+\begin{itemize}
+    \item \textbf{সকাল ১১:৩০:} চেক-আউট $\rightarrow$ \textbf{বিকেল ৩:০০:} ফিরতি জাহাজ $\rightarrow$ \textbf{রাত ১০:০০:} কক্সবাজার পৌঁছানো। রাতে হোটেল হাইপেরিয়নে অবস্থান।
+    \item \textbf{আবহাওয়া:} [২০$^\circ$--২৮$^\circ$সে.], সম্পূর্ণ শুষ্ক আবহাওয়া।
+\end{itemize}
+
+\subsection*{২৭ নভেম্বর (শুক্রবার): কক্সবাজার $\rightarrow$ চট্টগ্রাম $\rightarrow$ সিলেট}
+\begin{itemize}
+    \item \textbf{সকাল:} নাস্তা ও চেক-আউট $\rightarrow$ \textbf{দুপুর ১২:৩০:} \textbf{কক্সবাজার এক্সপ্রেস} ট্রেনে চট্টগ্রাম।
+    \item \textbf{চট্টগ্রাম:} দুপুর ও রাতের খাবার $\rightarrow$ \textbf{রাত ৯:৩০:} \textbf{উদয়ন এক্সপ্রেস} ট্রেনে সিলেট যাত্রা।
+    \item \textbf{আবহাওয়া:} [১৯$^\circ$--২৮$^\circ$সে.], মনোরম রৌদ্রোজ্জ্বল আবহাওয়া।
+    \item \href{https://maps.google.com/?q=Chattogram+Railway+Station}{\color{primary}[Google Map: চট্টগ্রাম রেলস্টেশন]}
+\end{itemize}
+
+\subsection*{২৮ নভেম্বর (শনিবার সকাল): সিলেটে প্রত্যাবর্তন}
+\begin{itemize}
+    \item \textbf{সকাল:} ইনশাআল্লাহ সিলেটে সফলভাবে প্রত্যাবর্তন ও ট্যুর সমাপ্তি।
+\end{itemize}
+
+\newpage
+
+\section*{মাস্টার প্যাকিং ও প্রস্তুতি চেকলিস্ট}
+\small
+\begin{itemize}
+    \item[$\square$] \textbf{জাহাজের টিকিট ও অনলাইন ট্রাভেল পাস (QR Code):} অফলাইন কপি/স্ক্রিনশট
+    \item[$\square$] \textbf{সেন্টমার্টিন পরিবেশ সংরক্ষণ ফি (৳১০০):} রসিদ বা কনফার্মেশন কপি
+    \item[$\square$] \textbf{NID / পাসপোর্ট / জন্ম সনদের ফটোকপি ও আসল স্টুডেন্ট আইডি}
+    \item[$\square$] \textbf{ছাতা (Umbrella)} ও \textbf{ওয়ার্ম জ্যাকেট / হুডি}
+    \item[$\square$] \textbf{ওডোমস বা মসকিটো রিপেলেন্ট (Odomos)}
+    \item[$\square$] \textbf{মোজা (Socks for Coral):} সেন্টমার্টিনে ধারালো প্রবালের আঘাত এড়াতে
+    \item[$\square$] \textbf{হালকা ব্যাগ ও পানির বোতল} (পথে পানিশূন্যতা রোধে)
+    \item[$\square$] \textbf{নো হাই হিল:} আরামদায়ক গ্রিপ স্যান্ডেল / স্নিকার্স
+    \item[$\square$] \textbf{জরুরি ক্যাশ টাকা (৳৩,০০০--৪,০০০)}
+    \item[$\square$] \textbf{ফার্স্ট এইড ওষুধ:} স্যালাইন, প্যারাসিটামল, অ্যান্টাসিড, বমির ওষুধ \textbf{(কিছু জরুরি ওষুধ SUST মেডিক্যাল সেন্টার থেকেও নেওয়া আছে ব্যাকআপ হিসেবে)}
+    \item[$\square$] \textbf{ওয়াটারপ্রুফ মোবাইল পাউচ:} \textbf{(জরুরিতে একটি ছোট স্বচ্ছ পলিথিনও ব্যবহার করা যেতে পারে)}
+    \item[$\square$] \textbf{পাওয়ার ব্যাংক ও মাল্টিপ্লাগ:} লোডশেডিং ব্যাকআপ
+    \item[$\square$] \textbf{সানস্ক্রিন (SPF 50+) ও সানগ্লাস}
+    \item[$\square$] \textbf{*অন্যান্য প্রয়োজনীয় জিনিসপত্র (ব্যক্তিগত পছন্দ অনুযায়ী)}
+\end{itemize}
+
+\vspace{1.5mm}
+
+\section*{জনপ্রতি আনুমানিক বাজেট বিবরণী}
+\begin{center}
+\small
+\begin{tabular}{|l|r|}
+\hline
+\textbf{খরচের খাত} & \textbf{পরিমাণ (টাকা)} \\
+\hline
+সিলেট $\leftrightarrow$ চট্টগ্রাম ট্রেন (উদয়ন এক্সপ্রেস) & ১,০০০/- \\
+চট্টগ্রাম $\leftrightarrow$ চকরিয়া $\leftrightarrow$ মিরিঞ্জা $\leftrightarrow$ কক্সবাজার লোকাল & ১,০০০/- \\
+মিরিঞ্জা রিসোর্ট (১ রাত) & ১,০০০/- \\
+কক্সবাজার হাইপেরিয়ন হোটেল (২ রাত) & ১,০০০/- \\
+সেন্টমার্টিন প্যাকেজ ও জাহাজ (২ রাত) & ৫,০০০/- \\
+৬ দিনের খাবার ও ট্রানজিট মিলস & ৪,০০০/- \\
+লোকাল পরিবহন ও বিবিধ & ১,০০০/- \\
+\hline
+\textbf{মোট আনুমানিক বাজেট} & \textbf{~১৩,০০০/-} \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2mm}
+\begin{center}
+\rule{0.7\textwidth}{0.4pt}\\[1.2mm]
+{\footnotesize \textbf{\href{https://ashiq-sm.github.io/portfolio}{SM Ashikur Rahman}} $\cdot$ SUST GEB $\cdot$ \href{https://sm-nextgen-bionotes.vercel.app/}{BioNotes} $\cdot$ \href{https://wa.me/+8801773971905}{WhatsApp}}\\[1mm]
+{\scriptsize \color{gray} \textit{আল্লাহর রহমতে সবার সফর নিরাপদ ও বরকতময় হোক।}}
+\end{center}
+
+\end{document}

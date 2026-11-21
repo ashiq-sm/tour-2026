@@ -1,8 +1,11 @@
-const CACHE_NAME = 'studytour-v1';
+const CACHE_NAME = 'studytour-v2';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './noorehuda.ttf',
+  './icon-192.png',
+  './icon-512.png',
   './tour_roadmap_mobile.pdf'
 ];
 
