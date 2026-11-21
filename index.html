@@ -3,10 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Study Tour 2026 Interactive Experience | Mirinja • Cox's Bazar • Saint Martin</title>
+<title>Study Tour 2026 | Mirinja • Cox's Bazar • Saint Martin</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#005580">
+<meta name="theme-color" content="#003d5c">
 <link rel="apple-touch-icon" href="icon-192.png">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 <!-- Leaflet CSS for interactive cropped maps -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -14,54 +19,101 @@
 
 <style>
   :root {
-    --primary: #005580;
-    --primary-dark: #003d5c;
-    --accent: #c2410c;
-    --danger: #b71c1c;
-    --success: #15803d;
-    --bg: #f1f5f9;
-    --card-bg: #ffffff;
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --accent: #f97316;
+    --danger: #ef4444;
+    --success: #10b981;
+    --bg-glass: rgba(255, 255, 255, 0.82);
+    --border-glass: rgba(255, 255, 255, 0.6);
     --text: #0f172a;
     --text-muted: #64748b;
-    --border: #e2e8f0;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Kalpurush", sans-serif;
-    background-color: var(--bg);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Kalpurush", sans-serif;
     color: var(--text);
     line-height: 1.55;
-    padding-bottom: 80px;
+    background-color: #0f172a;
+    padding-bottom: 90px;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
+
+  /* Fixed Parallax Dynamic Background Layers */
+  #bg-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at top right, rgba(2, 132, 199, 0.25), rgba(15, 23, 42, 0.95) 75%);
+    z-index: -1;
+    transition: opacity 0.8s ease;
+  }
+  .bg-scene {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -2;
+    filter: brightness(0.42) saturate(1.2);
+  }
+  .bg-active { opacity: 1; }
+
+  /* Header Bar */
   header {
-    background: linear-gradient(135deg, var(--primary), #0284c7);
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: white;
-    padding: 16px 14px;
+    padding: 14px 16px;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .header-bismillah { font-size: 0.95rem; opacity: 0.95; font-family: 'Amiri', serif; }
-  .header-title { font-size: 1.25rem; font-weight: 700; margin-top: 2px; }
-  .header-sub { font-size: 0.82rem; opacity: 0.9; margin-top: 2px; }
+  .header-left { display: flex; flex-direction: column; }
+  .header-bismillah { font-size: 0.82rem; opacity: 0.9; color: #4ade80; font-family: serif; }
+  .header-title { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.3px; }
   
-  .container { max-width: 680px; margin: 0 auto; padding: 12px 10px; }
-  
+  .quick-pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(135deg, var(--primary), #0284c7);
+    color: white;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .container { max-width: 650px; margin: 0 auto; padding: 14px 10px; }
+
+  /* Modern Glassmorphism Cards */
   .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 12px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-glass);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .card-title {
     font-size: 1.05rem;
     font-weight: 700;
     color: var(--primary-dark);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -70,82 +122,84 @@
   /* Interactive Cropped Map Box */
   .spot-map-container {
     width: 100%;
-    height: 180px;
-    border-radius: 10px;
+    height: 190px;
+    border-radius: 12px;
     margin: 10px 0 8px 0;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(0,0,0,0.1);
     overflow: hidden;
     z-index: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
 
-  /* Tags & Highlights */
+  /* Tags */
   .tag {
     display: inline-block;
-    padding: 2px 8px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    border-radius: 6px;
     margin-right: 4px;
     margin-bottom: 4px;
   }
   .tag-weather { background: #e0f2fe; color: #0369a1; }
-  .tag-opportunity { background: #fef3c7; color: #92400e; }
-  .tag-experience { background: #f3e8ff; color: #6b21a8; }
+  .tag-opp { background: #fef3c7; color: #92400e; }
   .tag-prep { background: #fee2e2; color: #991b1b; }
 
-  /* Info Sections within Days */
+  /* Info Section inside Spot Cards */
   .spot-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 8px;
+    background: rgba(248, 250, 252, 0.75);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 10px;
     font-size: 0.88rem;
   }
   .spot-box-title {
     font-weight: 700;
     color: #1e293b;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
     display: flex;
     align-items: center;
     gap: 4px;
   }
 
-  /* Timeline */
+  /* Timeline Item */
   .timeline-item {
-    border-left: 3px solid #cbd5e1;
-    padding-left: 12px;
-    padding-bottom: 16px;
+    border-left: 3px solid rgba(2, 132, 199, 0.4);
+    padding-left: 14px;
+    padding-bottom: 18px;
     position: relative;
   }
   .timeline-item::before {
     content: '';
     position: absolute;
-    left: -6.5px;
-    top: 4px;
-    width: 10px;
-    height: 10px;
+    left: -7px;
+    top: 5px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     background: var(--primary);
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
   }
   .day-badge {
     display: inline-block;
-    background: #e0f2fe;
-    color: #0369a1;
+    background: #0284c7;
+    color: white;
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 4px;
+    padding: 2px 10px;
+    border-radius: 20px;
     margin-bottom: 6px;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
   }
 
-  /* Checklist */
+  /* Checklist Items */
   .check-item {
     display: flex;
     align-items: flex-start;
     gap: 8px;
     padding: 8px 0;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     font-size: 0.88rem;
   }
   .check-item input[type="checkbox"] {
@@ -153,9 +207,10 @@
     height: 18px;
     accent-color: var(--primary);
     margin-top: 2px;
+    cursor: pointer;
   }
 
-  /* Buttons */
+  /* Buttons Grid */
   .btn-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -167,65 +222,80 @@
     align-items: center;
     justify-content: center;
     gap: 4px;
-    background: #f1f5f9;
+    background: rgba(255,255,255,0.9);
     color: #0f172a;
     padding: 8px 10px;
-    border-radius: 8px;
+    border-radius: 10px;
     text-decoration: none;
     font-size: 0.82rem;
-    font-weight: 600;
-    border: 1px solid var(--border);
+    font-weight: 700;
+    border: 1px solid var(--border-glass);
     text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
   .action-btn.emergency { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
 
-  /* Author Portal Card */
+  /* Author & Learning Portal */
   .author-portal {
-    background: linear-gradient(135deg, #0f172a, #1e293b);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+    backdrop-filter: blur(20px);
     color: white;
-    border-radius: 12px;
-    padding: 16px;
+    border-radius: 18px;
+    padding: 18px;
     margin-top: 16px;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
   .portal-links {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 6px;
-    margin-top: 10px;
+    margin-top: 12px;
   }
   .portal-btn {
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.08);
     color: #38bdf8;
-    padding: 6px 10px;
-    border-radius: 6px;
+    padding: 6px 11px;
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.78rem;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.12);
+    transition: all 0.2s;
   }
-  .portal-btn:hover { background: rgba(255,255,255,0.22); }
+  .portal-btn:hover { background: rgba(56, 189, 248, 0.2); transform: translateY(-1px); }
 
   @media print {
     body { background: white; padding-bottom: 0; }
-    header { background: white; color: black; border-bottom: 2px solid #000; position: static; }
-    .spot-map-container, .no-print { display: none !important; }
+    header, #bg-overlay, .bg-scene, .spot-map-container, .no-print { display: none !important; }
+    .card { background: white; border: 1px solid #ccc; box-shadow: none; break-inside: avoid; }
   }
 </style>
 </head>
 <body>
 
+<!-- Dynamic Transparent Background Scenes for Parallax Scrolling -->
+<div id="bg-scene-train" class="bg-scene bg-active" style="background-image: url('https://images.unsplash.com/photo-1510915361894-db8b60106cb1?q=80&w=1200&auto=format&fit=crop');"></div>
+<div id="bg-scene-mirinja" class="bg-scene" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop');"></div>
+<div id="bg-scene-cox" class="bg-scene" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop');"></div>
+<div id="bg-scene-island" class="bg-scene" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200&auto=format&fit=crop');"></div>
+<div id="bg-overlay"></div>
+
 <header>
-  <div class="header-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-  <div class="header-title">🎓 National Study Tour 2026</div>
-  <div class="header-sub">সিলেট • চট্টগ্রাম • মিরিঞ্জা ভ্যালি • কক্সবাজার • সেন্টমার্টিন</div>
+  <div class="header-left">
+    <div class="header-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div class="header-title">🎓 National Study Tour 2026</div>
+  </div>
+  <a href="tour_roadmap_mobile.pdf" download="tour_roadmap_mobile.pdf" class="quick-pdf-btn">
+    📄 PDF ডক
+  </a>
 </header>
 
 <div class="container">
 
   <!-- Safar Dua Card -->
-  <div class="card" style="background: #f0fdf4; border-left: 4px solid #166534; padding: 12px 14px;">
+  <div class="card" style="border-left: 4px solid #166534; background: rgba(240, 253, 244, 0.88);">
     <div style="font-size: 0.95rem; font-weight: 700; color: #166534; margin-bottom: 4px;">
       🕌 সফরের দোয়া (হিসনুল মুসলিম)
     </div>
@@ -238,19 +308,19 @@
     <div style="font-size: 0.82rem; color: #374151; margin-bottom: 6px;">
       <b>অর্থ:</b> "পবিত্র সেই সত্তা, যিনি একে আমাদের অনুগত করে দিয়েছেন, অথচ আমরা একে বশে আনতে পারতাম না। আর নিশ্চয়ই আমরা আমাদের রবের নিকটই প্রত্যাবর্তনকারী।"
     </div>
-    <a href="https://dua.gtaf.org/category/travel" target="_blank" style="font-size: 0.8rem; font-weight: 600; color: #15803d; text-decoration: none;">
+    <a href="https://dua.gtaf.org/category/travel" target="_blank" style="font-size: 0.8rem; font-weight: 700; color: #15803d; text-decoration: none;">
       🔗 GTAF হিসনুল মুসলিম: সফরের পূর্ণাঙ্গ দোয়াসমূহ ➔
     </a>
   </div>
 
   <!-- Critical Alerts Card -->
-  <div class="card" style="border-left: 4px solid var(--danger); background: #fff1f2;">
+  <div class="card" style="border-left: 4px solid var(--danger); background: rgba(255, 241, 242, 0.88);">
     <strong style="color: var(--danger); font-size: 0.95rem;">🚨 নোটিশ বোর্ডের জরুরি কড়া নির্দেশনা ও নিয়মাবলী</strong>
     <ul style="padding-left: 18px; font-size: 0.86rem; line-height: 1.5; margin-top: 4px;">
       <li><b>বাস ছাড়ার সময় (২১ নভেম্বর):</b> <b>রাত ৮:৩০-এ ভার্সিটি গেট থেকে বাস ছাড়বে।</b> বাস ঠিক সময়ে ছাড়বে, কেউ লেট করলে নিজ দায়িত্বে স্টেশনে যেতে হবে (ট্রেন কাউকে অপেক্ষা করবে না)।</li>
       <li><b>সিলেট রেলস্টেশন:</b> রাত ১০:০০-এ <b>উদয়ন এক্সপ্রেস</b> ট্রেন ছাড়বে।</li>
-      <li><b>জাহাজ ঘাট:</b> টেকনাফ রুট বন্ধ। জাহাজ ছাড়বে কক্সবাজার শহরের <b>নুনিয়াছড়া বিআইডব্লিউটিএ ঘাট</b> থেকে (সকাল ৬:০০-তে হোটেল থেকে ঘাটে রওনা, ৭:০০-তে জাহাজে যাত্রা)।</li>
-      <li><b>সেন্টমার্টিন রাত্রিযাপন:</b> পরিবেশ মন্ত্রণালয়ের ২৭ অক্টোবরের প্রজ্ঞাপন অনুযায়ী পুরো নভেম্বর মাসেই রাত্রিযাপন অনুমোদিত।</li>
+      <li><b>জাহাজ ঘাট:</b> টেকনাফ রুট বন্ধ। জাহাজ ছাড়বে কক্সবাজার শহরের <b>নুনিয়াছড়া বিআইডব্লিউটিএ ঘাট</b> থেকে (সকাল ৬:০০-তে হোটেল থেকে রওনা, ৭:০০-তে জাহাজ যাত্রা)।</li>
+      <li><b>সেন্টমার্টিন রাত্রিযাপন:</b> পরিবেশ মন্ত্রণালয়ের ২৭ অক্টোবরের প্রজ্ঞাপন অনুযায়ী নভেম্বর থেকেই রাত্রিযাপন অনুমোদিত।</li>
       <li><b>ট্রাভেল পাস ও ফি:</b> অনলাইন QR ট্রাভেল পাস ও ৳১০০ পরিবেশ ফি রসিদ এবং সাথে আসল <b>স্টুডেন্ট আইডি ও NID</b> থাকা বাধ্যতামূলক।</li>
     </ul>
   </div>
@@ -268,10 +338,10 @@
   <div class="card">
     <div class="card-title">🗺️ ইন্টারেক্টিভ স্পট শিডিউল, ক্রপড ম্যাপ ও এক্সপেরিয়েন্স গাইড</div>
 
-    <!-- Day 0: Sylhet -->
-    <div class="timeline-item">
+    <!-- Section 1: Sylhet -->
+    <div id="section-sylhet" class="timeline-item spot-section">
       <span class="day-badge">Day 0 • ২১ নভেম্বর (বৃহস্পতিবার রাত) • সিলেট থেকে যাত্রা</span>
-      <p><b>ভার্সিটি গেট:</b> রাত ৮:৩০-এ বাস ছাড়বে।<br>
+      <p><b>ভার্সিটি গেট:</b> রাত ৮:৩০-এ বাস ছাড়বে (লেট করলে নিজ দায়িত্বে)।<br>
       <b>সিলেট রেলস্টেশন:</b> রাত ১০:০০-এ উদয়ন এক্সপ্রেসে যাত্রা।</p>
       
       <div class="spot-box">
@@ -283,8 +353,8 @@
       </div>
     </div>
 
-    <!-- Day 1: Mirinja Valley -->
-    <div class="timeline-item">
+    <!-- Section 2: Mirinja Valley -->
+    <div id="section-mirinja" class="timeline-item spot-section">
       <span class="day-badge">Day 1 • ২২ নভেম্বর (শুক্রবার) • চট্টগ্রাম ➔ মিরিঞ্জা ভ্যালি (লামা)</span>
       <p><b>সকাল ৬:৩০–৭:০০:</b> চট্টগ্রাম পৌঁছে সকালের নাস্তা (৭:০০-৮:০০)।<br>
       <b>সকাল ৮:০০:</b> বাসে চকরিয়া রওনা ➔ চাঁদের গাড়ি/লোকালে লামা মিরিঞ্জা রিসোর্টে পৌঁছানো (দুপুর ১২:০০ চেক-ইন)।</p>
@@ -292,7 +362,7 @@
       <div class="spot-box">
         <span class="tag tag-weather">পূর্বাভাস [২২°–২৭°সে.] • বৃষ্টি ~১০.৮ মিমি (৮২%)</span>
         <span class="tag tag-prep">ওডোমস ক্রিম • রেইনকোট/ছাতা • গ্রিপ স্যান্ডেল</span>
-        <span class="tag tag-opportunity">মেঘের ওপর সূর্যাস্ত ও রিসোর্ট ক্যাম্পিং</span>
+        <span class="tag tag-opp">মেঘের ওপর সূর্যাস্ত ও রিসোর্ট ক্যাম্পিং</span>
         
         <div id="map-mirinja" class="spot-map-container"></div>
 
@@ -305,8 +375,8 @@
       </div>
     </div>
 
-    <!-- Day 2: Cox's Bazar -->
-    <div class="timeline-item">
+    <!-- Section 3: Cox's Bazar -->
+    <div id="section-cox" class="timeline-item spot-section">
       <span class="day-badge">Day 2 • ২৩ নভেম্বর (শনিবার) • মিরিঞ্জা ➔ কক্সবাজার</span>
       <p><b>সকাল ১০:৩০:</b> মিরিঞ্জা থেকে চকরিয়া রওনা ➔ চকরিয়া থেকে কক্সবাজার।<br>
       <b>দুপুর:</b> কক্সবাজার পৌঁছে দুপুরের খাবার ➔ <b>Hotel Hyperion (সুগন্ধা পয়েন্ট)</b>-এ ৫টি এসি ফ্ল্যাটে চেক-ইন।<br>
@@ -314,7 +384,7 @@
 
       <div class="spot-box">
         <span class="tag tag-weather">পূর্বাভাস [২৩°–২৮°সে.] • হালকা বৃষ্টি ~৭.৮ মিমি (৬৯%)</span>
-        <span class="tag tag-experience">সুগন্ধা বিচ ওয়াক • রূপচাঁদা ফ্রাই • বার্মিজ মার্কেট</span>
+        <span class="tag tag-opp">সুগন্ধা বিচ ওয়াক • রূপচাঁদা ফ্রাই • বার্মিজ মার্কেট</span>
         
         <div id="map-coxsbazar" class="spot-map-container"></div>
 
@@ -327,8 +397,8 @@
       </div>
     </div>
 
-    <!-- Day 3 & 4: Saint Martin -->
-    <div class="timeline-item">
+    <!-- Section 4: Saint Martin -->
+    <div id="section-island" class="timeline-item spot-section">
       <span class="day-badge">Day 3 & 4 • ২৪–২৫ নভেম্বর • কক্সবাজার ➔ সেন্টমার্টিন দ্বীপ</span>
       <p><b>২৪ নভেম্বর ভোর ৬:০০:</b> হোটেল থেকে নুনিয়াছড়া ঘাট ➔ <b>সকাল ৭:০০:</b> জাহাজে যাত্রা।<br>
       <b>দুপুর ১:৩০:</b> দ্বীপে পৌঁছে রিসোর্টে চেক-ইন (১০টি ডাবল রুম)।<br>
@@ -337,7 +407,7 @@
       <div class="spot-box">
         <span class="tag tag-weather">পূর্বাভাস [২২°–৩০°সে.] • সম্পূর্ণ শুষ্ক (বৃষ্টি ০ মিমি)</span>
         <span class="tag tag-prep">প্রবালের জন্য মোজা • সানস্ক্রিন • পাওয়ার ব্যাংক • নগদ ক্যাশ</span>
-        <span class="tag tag-opportunity">সৈকতে সাইক্লিং • ডাবের পানি • কোরাল রিফ ভিউ</span>
+        <span class="tag tag-opp">সৈকতে সাইক্লিং • ডাবের পানি • কোরাল রিফ ভিউ</span>
 
         <div id="map-saintmartin" class="spot-map-container"></div>
 
@@ -351,7 +421,7 @@
       </div>
     </div>
 
-    <!-- Day 5 & 6: Return Journey -->
+    <!-- Return Journey -->
     <div class="timeline-item" style="border-left: none; padding-bottom: 0;">
       <span class="day-badge">Day 5–7 • ২৬–২৮ নভেম্বর • সেন্টমার্টিন ➔ কক্সবাজার ➔ চট্টগ্রাম ➔ সিলেট</span>
       <p><b>২৬ নভেম্বর:</b> সকাল ১১:৩০-এ চেক-আউট ➔ বিকেল ৩:০০-এ ফিরতি জাহাজ ➔ রাত ১০:০০-এ কক্সবাজার হোটেল হাইপেরিয়নে অবস্থান।<br>
@@ -396,7 +466,7 @@
       <a href="tel:01518904986" class="action-btn">📞 ফয়সাল: 01518-904986</a>
       <a href="tel:+8801872959460" class="action-btn">📞 মুকতাদির: 01872-959460</a>
       <a href="tel:+8801839903963" class="action-btn">📞 অর্ঘ কানুনগো: 01839-903963</a>
-      <span class="action-btn" style="background:#f8fafc; color:#475569;">👥 তন্ময় (ম্যানেজমেন্ট)</span>
+      <span class="action-btn" style="background:rgba(255,255,255,0.6); color:#475569;">👥 তন্ময় (ম্যানেজমেন্ট)</span>
     </div>
   </div>
 
@@ -412,16 +482,16 @@
 
   <!-- Author Learning & Apps Resource Portal -->
   <div class="author-portal">
-    <div style="font-size: 0.82rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px;">Author & Learning Resource Portal</div>
-    <div style="font-size: 1.15rem; font-weight: 700; margin: 4px 0; color: #38bdf8;">
+    <div style="font-size: 0.8rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 1.5px;">Author & Learning Resource Portal</div>
+    <div style="font-size: 1.2rem; font-weight: 700; margin: 4px 0; color: #38bdf8;">
       এস. এম. আশিকুর রহমান (SM Ashikur Rahman)
     </div>
     <div style="font-size: 0.82rem; opacity: 0.9;">
       জেনেটিক ইঞ্জিনিয়ারিং অ্যান্ড বায়োটেকনোলজি (GEB), SUST
     </div>
 
-    <div style="margin-top: 12px; font-size: 0.85rem; font-weight: 600; color: #e2e8f0;">
-      🌐 ব্রাউজ করুন আমার অন্যান্য ওয়েব প্রজেক্ট ও বায়োনোটস:
+    <div style="margin-top: 14px; font-size: 0.86rem; font-weight: 600; color: #e2e8f0;">
+      🌐 ব্রাউজ করুন আমার অন্যান্য বায়ো-রিসোর্স ও পোর্টফোলিও:
     </div>
 
     <div class="portal-links">
@@ -439,21 +509,20 @@
     </div>
   </div>
 
-  <!-- Print & PDF button -->
-  <div style="text-align: center; margin-top: 14px; display: flex; gap: 8px; justify-content: center;" class="no-print">
-    <a href="tour_roadmap_mobile.pdf" download="tour_roadmap_mobile.pdf" style="display: inline-block; background: #0369a1; color: white; padding: 12px 18px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
-      📥 Download LaTeX PDF
+  <!-- Bottom Fixed/Floating Download Button -->
+  <div style="text-align: center; margin-top: 16px; display: flex; gap: 8px; justify-content: center;" class="no-print">
+    <a href="tour_roadmap_mobile.pdf" download="tour_roadmap_mobile.pdf" style="display: inline-block; background: linear-gradient(135deg, var(--primary), #0284c7); color: white; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 0.92rem; text-decoration: none; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);">
+      📥 Download Complete LaTeX PDF
     </a>
-    <button onclick="window.print()" style="background: var(--primary); color: white; border: none; padding: 12px 18px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
-      📄 Print / Save Cheatsheet
+    <button onclick="window.print()" style="background: rgba(255,255,255,0.9); color: #0f172a; border: 1px solid var(--border-glass); padding: 12px 18px; border-radius: 10px; font-weight: 700; font-size: 0.92rem; cursor: pointer;">
+      📄 Print Cheatsheet
     </button>
   </div>
 
 </div>
 
-<!-- Leaflet Cropped Maps Initialization Script -->
+<!-- Leaflet Cropped Maps & Parallax Scroll Observer -->
 <script>
-  // Service Worker Registration for PWA Offline Cache
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js').catch(console.error);
@@ -470,7 +539,7 @@
     });
   });
 
-  // Helper function to create interactive cropped maps with OpenStreetMap
+  // Maps Initialization
   function initSpotMap(elementId, lat, lon, title, zoom = 14) {
     try {
       const map = L.map(elementId, {
@@ -479,31 +548,41 @@
         zoomControl: false,
         attributionControl: false
       });
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18
-      }).addTo(map);
-
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
       L.marker([lat, lon]).addTo(map).bindPopup('<b>' + title + '</b>').openPopup();
-      
-      // Auto resize when visible
       setTimeout(() => { map.invalidateSize(); }, 400);
     } catch(e) {
-      console.warn('Map load skipped/offline:', e);
+      console.warn('Map err:', e);
     }
   }
 
   window.addEventListener('DOMContentLoaded', () => {
-    // 1. Sylhet Station
     initSpotMap('map-sylhet', 24.8821, 91.8711, 'সিলেট রেলওয়ে স্টেশন');
-    // 2. Mirinja Valley (Lama)
     initSpotMap('map-mirinja', 21.7820, 92.2030, 'মিরিঞ্জা ভ্যালি, লামা', 13);
-    // 3. Cox\'s Bazar (Sugandha Point)
     initSpotMap('map-coxsbazar', 21.4180, 91.9820, 'হোটেল হাইপেরিয়ন (সুগন্ধা পয়েন্ট)', 14);
-    // 4. Saint Martin\'s Island
-    initSpotMap('map-saintmartin', 20.6237, 92.3234, 'সেন্টমার্টিন দ্বীপ জেটি ও রিসোর্ট জোন', 13);
-    // 5. Chittagong Railway Station
+    initSpotMap('map-saintmartin', 20.6237, 92.3234, 'সেন্টমার্টিন দ্বীপ জেটি ও বিচ', 13);
     initSpotMap('map-ctg', 22.3350, 91.8315, 'চট্টগ্রাম রেলওয়ে স্টেশন', 14);
   });
+
+  // Parallax Background Scene Switcher on Scroll
+  const scenes = {
+    'section-sylhet': document.getElementById('bg-scene-train'),
+    'section-mirinja': document.getElementById('bg-scene-mirinja'),
+    'section-cox': document.getElementById('bg-scene-cox'),
+    'section-island': document.getElementById('bg-scene-island')
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        Object.values(scenes).forEach(el => el && el.classList.remove('bg-active'));
+        const activeScene = scenes[entry.target.id];
+        if (activeScene) activeScene.classList.add('bg-active');
+      }
+    });
+  }, { threshold: 0.35 });
+
+  document.querySelectorAll('.spot-section').forEach(sec => observer.observe(sec));
 </script>
 
 </body>
