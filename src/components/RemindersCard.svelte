@@ -1,6 +1,5 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { openAndroidAlarm, isAndroidDevice } from '../utils/androidAlarm';
 
   let { reminders = [] } = $props();
 
@@ -10,7 +9,7 @@
   let nowTs = $state(Date.now());
   let inAppBanner = $state(null);
   let tickTimer = null;
-  let hasAndroid = $state(false);
+  let showCalTip = $state(false);
 
   let upcoming = $derived.by(() => {
     return reminders
@@ -30,7 +29,6 @@
   }
 
   onMount(() => {
-    hasAndroid = isAndroidDevice();
     if ('Notification' in window) {
       notifPermission = Notification.permission;
     }
@@ -64,7 +62,7 @@
 
   async function requestNotifications() {
     if (!('Notification' in window)) {
-      alert('এই ব্রাউজারে নোটিফিকেশন সমর্থিত নয়; নিচের 📅 Phone Alarms (.ics) অথবা ⏰ Android Alarm ব্যবহার করুন।');
+      alert('এই ব্রাউজারে নোটিফিকেশন সমর্থিত নয়; নিচের 📅 ক্যালেন্ডার অ্যালার্ম (.ics) ফাইল ডাউনলোড করুন।');
       return;
     }
     const res = await Notification.requestPermission();
@@ -86,7 +84,7 @@
     } else {
       inAppBanner = {
         title: upcoming ? upcoming.title : '🔔 রিমাইন্ডার প্রিভিউ',
-        body: upcoming ? upcoming.body : 'প্রথমে "Enable Notifications" চাপুন অথবা ফোনের ক্যালেন্ডারে সেভ করুন।'
+        body: upcoming ? upcoming.body : 'প্রথমে "নোটিফিকেশন চালু করুন" চাপুন অথবা ক্যালেন্ডারে সেভ করুন।'
       };
       setTimeout(() => { inAppBanner = null; }, 5000);
     }
@@ -167,14 +165,9 @@
     a.download = 'study_tour_2026_alarms.ics';
     a.click();
     URL.revokeObjectURL(a.href);
-  }
 
-  function handleSetNextAlarm() {
-    if (upcoming) {
-      openAndroidAlarm(upcoming);
-    } else if (reminders.length > 0) {
-      openAndroidAlarm(reminders[0]);
-    }
+    // Show friendly popup tips
+    showCalTip = true;
   }
 </script>
 
@@ -183,8 +176,8 @@
     <div class="next-up-banner">
       <div class="next-up-header">
         <div class="next-up-label">⏱️ পরবর্তী রিমাইন্ডার ({upcoming.label})</div>
-        <button class="btn-quick-alarm" onclick={() => openAndroidAlarm(upcoming)} title="ফোনের Clock অ্যাপে অ্যালার্ম সেট করুন">
-          ⏰ Android Alarm
+        <button class="btn-quick-sync" onclick={downloadCalendarAlarms} title="ক্যালেন্ডারে সিঙ্ক করুন">
+          📅 সিঙ্ক (.ics)
         </button>
       </div>
       <div class="next-up-title">{upcoming.title}</div>
@@ -203,13 +196,22 @@
       </button>
     {/if}
 
-    <button class="rem-btn rem-btn-alarm" onclick={handleSetNextAlarm} title="Android ডিভাইসে ঘড়ির Clock অ্যাপ খুলবে">
-      ⏰ Android ঘড়িতে অ্যালার্ম
-    </button>
-
     <button class="rem-btn rem-btn-cal" onclick={downloadCalendarAlarms}>
-      📅 ক্যালেন্ডার অ্যালার্ম (.ics)
+      📅 ক্যালেন্ডার অ্যালার্ম ডাউনলোড (.ics)
     </button>
+  </div>
+
+  <!-- Helpful short tips for .ics calendar sync on phones -->
+  <div class="ics-tips-box">
+    <div class="ics-tips-header">
+      <span class="ics-tips-badge">💡 ক্যালেন্ডার টিপস</span>
+      <span>Android ও iPhone-এ অ্যালার্ম সিঙ্ক করার নিয়ম:</span>
+    </div>
+    <ol class="ics-tips-list">
+      <li>বাটন চাপলে <b>study_tour_2026_alarms.ics</b> ফাইলটি ডাউনলোড হবে।</li>
+      <li>ডাউনলোড শেষ হলে নোটিফিকেশন বা ফাইল ম্যানেজার থেকে ফাইলে <b>ট্যাপ (Open)</b> করুন।</li>
+      <li>আপনার <b>Google Calendar</b> বা ফোনের <b>Calendar</b> অ্যাপে <b>"Add All" / "আমদানি করুন"</b> দিলেই ৮টি গুরুত্বপূর্ণ অ্যালার্ম স্বয়ংক্রিয়ভাবে ফোনে সেট হয়ে যাবে!</li>
+    </ol>
   </div>
 
   <div class="rem-list">
@@ -226,14 +228,6 @@
         <div class="rem-info">
           <div class="rem-time-row">
             <span class="rem-time">{r.label}</span>
-            <button
-              class="rem-mini-alarm-btn"
-              onclick={() => openAndroidAlarm(r)}
-              title="এই সময়ের জন্য Android Alarm সেট করুন"
-              aria-label="Set Android Alarm"
-            >
-              ⏰ Alarm
-            </button>
           </div>
           <div class="rem-title">{r.title}</div>
           <div class="rem-body">{r.body}</div>
@@ -242,6 +236,35 @@
     {/each}
   </div>
 </div>
+
+{#if showCalTip}
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div class="info-modal-backdrop" onclick={(e) => { if (e.target === e.currentTarget) showCalTip = false; }}>
+    <div class="info-modal-box">
+      <div class="info-modal-header">
+        <strong style="color: #0369a1;">📅 ক্যালেন্ডার (.ics) অ্যালার্ম সেট হয়েছে!</strong>
+        <button class="info-modal-close" onclick={() => { showCalTip = false; }} aria-label="Close">✕</button>
+      </div>
+      <div class="info-modal-body" style="font-size: 0.88rem; line-height: 1.6;">
+        <p><b>study_tour_2026_alarms.ics</b> ফাইলটি আপনার ফোনে ডাউনলোড হয়েছে।</p>
+        <div style="background: rgba(2, 132, 199, 0.08); padding: 10px 12px; border-radius: 10px; margin: 10px 0; border: 1px solid rgba(2, 132, 199, 0.25);">
+          📱 <b>কীভাবে ফোনের ক্যালেন্ডারে যুক্ত করবেন:</b>
+          <ol style="padding-left: 20px; margin-top: 6px;">
+            <li>ফোনের নোটিফিকেশন বার নামিয়ে ডাউনলোড ফাইলে ক্লিক করুন (বা Downloads ফোল্ডার থেকে খুলুন)।</li>
+            <li><b>Google Calendar</b> অথবা ফোনের <b>Calendar</b> সিলেক্ট করে <b>"Add all" (সব যোগ করুন)</b> চাপুন।</li>
+          </ol>
+        </div>
+        <p style="color: #047857; font-weight: 700;">✅ ট্রেন, বাস, জাহাজ ও সূর্যাস্তের নির্দিষ্ট সময়ে ফোন আপনাআপনি অ্যালার্ম বাজিয়ে সতর্ক করবে!</p>
+      </div>
+      <div class="info-modal-footer">
+        <button class="btn-modal-ok" onclick={() => { showCalTip = false; }}>
+          বুঝেছি ✓
+        </button>
+      </div>
+    </div>
+  </div>
+{/if}
 
 {#if inAppBanner}
   <div class="inapp-notif-banner">
@@ -280,22 +303,22 @@
     letter-spacing: 0.04em;
   }
 
-  .btn-quick-alarm {
-    background: #f59e0b;
-    border: 1px solid #d97706;
-    color: #78350f;
+  .btn-quick-sync {
+    background: #0284c7;
+    border: 1px solid #0369a1;
+    color: #ffffff;
     font-size: 0.74rem;
-    font-weight: 800;
+    font-weight: 700;
     padding: 0.22rem 0.6rem;
     border-radius: 0.45rem;
     cursor: pointer;
     transition: all 0.15s ease;
     white-space: nowrap;
-    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
   }
 
-  .btn-quick-alarm:hover {
-    background: #fbbf24;
+  .btn-quick-sync:hover {
+    background: #0369a1;
     transform: scale(1.02);
   }
 
@@ -321,15 +344,15 @@
 
   .rem-actions-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 0.45rem;
-    margin-bottom: 0.85rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .rem-btn {
-    padding: 0.55rem 0.65rem;
-    border-radius: 0.55rem;
-    font-size: 0.78rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.6rem;
+    font-size: 0.8rem;
     font-weight: 700;
     cursor: pointer;
     border: none;
@@ -358,26 +381,53 @@
     box-shadow: 0 2px 6px rgba(22, 163, 74, 0.15);
   }
 
-  .rem-btn-alarm {
-    background: #fef3c7;
-    color: #92400e;
-    border: 1px solid rgba(217, 119, 6, 0.4);
-    box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
-  }
-
-  .rem-btn-alarm:hover {
-    background: #fde68a;
-  }
-
   .rem-btn-cal {
-    background: #f1f5f9;
-    color: #1e293b;
-    border: 1px solid rgba(148, 163, 184, 0.4);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    background: #0369a1;
+    color: #ffffff;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    box-shadow: 0 2px 8px rgba(3, 105, 161, 0.3);
   }
 
   .rem-btn-cal:hover {
-    background: #e2e8f0;
+    background: #0284c7;
+  }
+
+  .ics-tips-box {
+    background: rgba(2, 132, 199, 0.08);
+    border: 1px solid rgba(2, 132, 199, 0.22);
+    border-radius: 0.65rem;
+    padding: 0.65rem 0.8rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .ics-tips-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #0369a1;
+    margin-bottom: 0.3rem;
+  }
+
+  .ics-tips-badge {
+    background: #0284c7;
+    color: #ffffff;
+    font-size: 0.68rem;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+
+  .ics-tips-list {
+    padding-left: 18px;
+    font-size: 0.76rem;
+    color: #334155;
+    line-height: 1.45;
+  }
+
+  .ics-tips-list li {
+    margin-bottom: 2px;
   }
 
   .rem-list {
@@ -429,23 +479,6 @@
     font-weight: 800;
   }
 
-  .rem-mini-alarm-btn {
-    background: #fef3c7;
-    border: 1px solid #d97706;
-    color: #92400e;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.18rem 0.5rem;
-    border-radius: 0.35rem;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .rem-mini-alarm-btn:hover {
-    background: #fde68a;
-    transform: scale(1.04);
-  }
-
   .rem-title {
     font-size: 0.88rem;
     font-weight: 700;
@@ -463,6 +496,16 @@
   .rem-past {
     opacity: 0.6;
     background: rgba(241, 245, 249, 0.75);
+  }
+
+  .btn-modal-ok {
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
   }
 
   .inapp-notif-banner {

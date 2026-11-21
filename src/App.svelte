@@ -397,7 +397,7 @@
       aria-expanded={!collapsedSections.rules}
     >
       <div class="card-title">
-        <span>📋 ট্যুর কোড অব কন্ডাক্ট (অর্ঘ-এর নির্দেশনা)</span>
+        <span>📋 ট্যুর কোড অব কন্ডাক্ট</span>
       </div>
       <div class="collapse-badge-row">
         <span class="chevron-icon">{collapsedSections.rules ? '▼' : '▲'}</span>
