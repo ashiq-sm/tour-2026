@@ -196,22 +196,19 @@
       </button>
     {/if}
 
-    <button class="rem-btn rem-btn-cal" onclick={downloadCalendarAlarms}>
-      📅 ক্যালেন্ডার অ্যালার্ম ডাউনলোড (.ics)
-    </button>
-  </div>
-
-  <!-- Helpful short tips for .ics calendar sync on phones -->
-  <div class="ics-tips-box">
-    <div class="ics-tips-header">
-      <span class="ics-tips-badge">💡 ক্যালেন্ডার টিপস</span>
-      <span>Android ও iPhone-এ অ্যালার্ম সিঙ্ক করার নিয়ম:</span>
+    <div class="cal-download-wrap">
+      <button class="rem-btn rem-btn-cal" onclick={downloadCalendarAlarms}>
+        📅 ক্যালেন্ডার অ্যালার্ম (.ics)
+      </button>
+      <button
+        class="cal-info-icon-btn"
+        onclick={() => { showCalTip = true; }}
+        title="ক্যালেন্ডার সিঙ্ক করার নিয়ম ও তথ্য"
+        aria-label="Calendar sync instructions"
+      >
+        !
+      </button>
     </div>
-    <ol class="ics-tips-list">
-      <li>বাটন চাপলে <b>study_tour_2026_alarms.ics</b> ফাইলটি ডাউনলোড হবে।</li>
-      <li>ডাউনলোড শেষ হলে নোটিফিকেশন বা ফাইল ম্যানেজার থেকে ফাইলে <b>ট্যাপ (Open)</b> করুন।</li>
-      <li>আপনার <b>Google Calendar</b> বা ফোনের <b>Calendar</b> অ্যাপে <b>"Add All" / "আমদানি করুন"</b> দিলেই ৮টি গুরুত্বপূর্ণ অ্যালার্ম স্বয়ংক্রিয়ভাবে ফোনে সেট হয়ে যাবে!</li>
-    </ol>
   </div>
 
   <div class="rem-list">
@@ -381,6 +378,40 @@
     box-shadow: 0 2px 6px rgba(22, 163, 74, 0.15);
   }
 
+  .cal-download-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .cal-download-wrap .rem-btn-cal {
+    flex: 1;
+  }
+
+  .cal-info-icon-btn {
+    background: rgba(2, 132, 199, 0.14);
+    border: 1px solid rgba(2, 132, 199, 0.35);
+    color: #0284c7;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: 900;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .cal-info-icon-btn:hover {
+    background: #0284c7;
+    color: #ffffff;
+    transform: scale(1.08);
+  }
+
   .rem-btn-cal {
     background: #0369a1;
     color: #ffffff;
@@ -390,44 +421,6 @@
 
   .rem-btn-cal:hover {
     background: #0284c7;
-  }
-
-  .ics-tips-box {
-    background: rgba(2, 132, 199, 0.08);
-    border: 1px solid rgba(2, 132, 199, 0.22);
-    border-radius: 0.65rem;
-    padding: 0.65rem 0.8rem;
-    margin-bottom: 0.85rem;
-  }
-
-  .ics-tips-header {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #0369a1;
-    margin-bottom: 0.3rem;
-  }
-
-  .ics-tips-badge {
-    background: #0284c7;
-    color: #ffffff;
-    font-size: 0.68rem;
-    padding: 1px 6px;
-    border-radius: 8px;
-    font-weight: 700;
-  }
-
-  .ics-tips-list {
-    padding-left: 18px;
-    font-size: 0.76rem;
-    color: #334155;
-    line-height: 1.45;
-  }
-
-  .ics-tips-list li {
-    margin-bottom: 2px;
   }
 
   .rem-list {

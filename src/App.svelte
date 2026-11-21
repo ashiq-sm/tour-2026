@@ -226,29 +226,46 @@
 <div id="bg-overlay"></div>
 
 <header>
-  <div class="header-bismillah">{tourData.meta.bismillah}</div>
-  <div class="header-row">
-    <div class="header-brand">
-      <img src="/tour-2026/logo.svg" alt="Tour Logo" class="header-logo" />
-      <div>
-        <div class="header-title">{tourData.meta.title}</div>
-        <div class="header-sub">{tourData.meta.subtitle}</div>
-      </div>
-    </div>
-    <div class="header-actions">
-      <!-- Live Viewers Pulse Indicator (Icon-only, glowing live dot, no text) -->
+  <div class="header-top-row">
+    <div class="header-bismillah">{tourData.meta.bismillah}</div>
+    <div class="header-top-actions">
+      <!-- Live Viewers Pulse Indicator -->
       <div
         class="live-viewer-pill"
         title="লাইভ একটিভ ভিউয়ার্স ({liveViewerCount})"
         aria-label="Live Active Viewers"
       >
         <span class="live-pulse-dot"></span>
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="live-viewer-icon">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="live-viewer-icon">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
         </svg>
       </div>
 
-      <!-- Scenery View Toggle (Replaced 'eye' with premium 'Landscape Mountain / Sun' icon) -->
+      <!-- Settings Button -->
+      <button
+        onclick={() => { isSettingsOpen = true; }}
+        class="header-icon-btn header-settings-btn"
+        title="অ্যাপ সেটিংস ও ভিউ (ফন্ট, সাইজ, থিম)"
+        aria-label="Settings"
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="header-row">
+    <div class="header-brand">
+      <img src="/tour-2026/logo.svg" alt="Tour Logo" class="header-logo" />
+      <div class="header-text-block">
+        <div class="header-title">{tourData.meta.title}</div>
+        <div class="header-sub">{tourData.meta.subtitle}</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <!-- Scenery View Toggle -->
       <button
         onclick={toggleAll}
         class="header-icon-btn toggle-scenery-btn {isAllCollapsed ? 'active-scenery' : ''}"
@@ -256,37 +273,25 @@
         aria-label="Toggle scenery view"
       >
         {#if isAllCollapsed}
-          <!-- Card Layers Stack Icon (Return to content) -->
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 2 7 12 12 22 7 12 2"/>
             <polyline points="2 17 12 22 22 17"/>
             <polyline points="2 12 12 17 22 12"/>
           </svg>
         {:else}
-          <!-- Premium Scenic Horizon Mountain & Sun Icon -->
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8 18l4-5 3 4 5-6 2 7H2l6-7z"/>
             <circle cx="17.5" cy="6.5" r="2.5" fill="currentColor"/>
           </svg>
         {/if}
       </button>
 
-      <!-- App & View Settings Button (Prominent ⚙️ gear icon with glow) -->
-      <button
-        onclick={() => { isSettingsOpen = true; }}
-        class="header-icon-btn header-settings-btn"
-        title="অ্যাপ সেটিংস ও ভিউ (ফন্ট, সাইজ, থিম)"
-        aria-label="Settings"
-      >
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-        </svg>
-      </button>
-
+      <!-- Share Button -->
       <button onclick={shareApp} class="header-icon-btn" title="Share App" aria-label="Share App">
         🔗
       </button>
+
+      <!-- PDF Download Button -->
       <a href={tourData.meta.pdfFile} download={tourData.meta.pdfFile} class="quick-pdf-btn">
         📄 PDF গাইড
       </a>
