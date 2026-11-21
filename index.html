@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Study Tour 2026 Roadmap | Mirinja • Cox's Bazar • Saint Martin</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#005580">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(console.error);
+    });
+  }
+</script>
+<style>
+  :root {
+    --primary: #006699;
+    --primary-dark: #004b73;
+    --accent: #ff6f00;
+    --danger: #d32f2f;
+    --success: #2e7d32;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding-bottom: 70px;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary), #0284c7);
+    color: white;
+    padding: 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  .header-title { font-size: 1.25rem; font-weight: 700; }
+  .header-sub { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+  
+  .container { max-width: 680px; margin: 0 auto; padding: 14px 12px; }
+  
+  .alert-card {
+    background: #fff1f2;
+    border-left: 4px solid var(--danger);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-size: 0.88rem;
+  }
+  .alert-card strong { color: var(--danger); display: block; margin-bottom: 4px; font-size: 0.95rem; }
+  
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Timeline */
+  .timeline-item {
+    border-left: 3px solid #cbd5e1;
+    padding-left: 14px;
+    padding-bottom: 16px;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 3px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+  .day-badge {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+  }
+  .spot-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-top: 6px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  /* Checklist */
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.9rem;
+  }
+  .check-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+    margin-top: 2px;
+  }
+  
+  /* Buttons & Contacts */
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #eef2ff;
+    color: #3730a3;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin: 4px 0;
+    width: 100%;
+    border: 1px solid #c7d2fe;
+  }
+  .contact-btn.emergency {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #fca5a5;
+  }
+
+  /* Print specific */
+  @media print {
+    body { background: white; color: black; padding-bottom: 0; }
+    header { background: white; color: black; border-bottom: 2px solid #000; box-shadow: none; position: static; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    .contact-btn, .spot-link { border: 1px solid #999; }
+    .no-print { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="font-size: 0.95rem; opacity: 0.95; margin-bottom: 2px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+  <div class="header-title">🎓 National Study Tour 2026</div>
+  <div class="header-sub">মিরিঞ্জা ভ্যালি • কক্সবাজার • সেন্টমার্টিন (২১-২৭ নভেম্বর)</div>
+</header>
+
+<div class="container">
+
+  <!-- Dua Card -->
+  <div class="card" style="background: #f0fdf4; border-left: 4px solid #166534; padding: 12px 14px;">
+    <div style="font-size: 0.95rem; font-weight: 700; color: #166534; margin-bottom: 4px;">
+      🕌 সফরের দোয়া (হিসনুল মুসলিম)
+    </div>
+    <div style="font-size: 0.98rem; font-family: 'Amiri', 'Traditional Arabic', serif; color: #14532d; margin: 4px 0; direction: rtl; text-align: right;">
+      سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ
+    </div>
+    <div style="font-size: 0.85rem; color: #166534; margin-bottom: 4px;">
+      <b>উচ্চারণ:</b> <i>সুবহানাল্লাজি সাখখারা লানা হাজা, ওয়া মা কুন্না লাহু মুকরিনিন। ওয়া ইন্না ইলা রাব্বিনা লামুনকালিবুন।</i>
+    </div>
+    <div style="font-size: 0.82rem; color: #374151; margin-bottom: 6px;">
+      <b>অর্থ:</b> "পবিত্র সেই সত্তা, যিনি একে আমাদের অনুগত করে দিয়েছেন, অথচ আমরা একে বশে আনতে পারতাম না। আর নিশ্চয়ই আমরা আমাদের রবের নিকটই প্রত্যাবর্তনকারী।"
+    </div>
+    <a href="https://dua.gtaf.org/category/travel" target="_blank" style="display: inline-block; font-size: 0.8rem; font-weight: 600; color: #15803d; text-decoration: none;">
+      🔗 GTAF হিসনুল মুসলিম: সফরের পূর্ণাঙ্গ দোয়াসমূহ ➔
+    </a>
+  </div>
+
+  <!-- Critical Alerts -->
+  <div class="alert-card">
+    <strong>⚠️ নোটিশ বোর্ডের জরুরি কড়া নির্দেশনা ও বর্তমান সতর্কতা</strong>
+    <ul style="padding-left: 18px; margin-top: 4px; line-height: 1.45;">
+      <li><b>বাস ছাড়ার সময় (২১ নভেম্বর):</b> <b>রাত ৮:৩০-এ ভার্সিটি গেট থেকে বাস ছাড়বে।</b> বাস ঠিক সময়ে ছাড়বে, কেউ লেট করলে নিজ দায়িত্বে স্টেশনে যেতে হবে (ট্রেন কাউকে অপেক্ষা করবে না)।</li>
+      <li><b>সিলেট রেলস্টেশন:</b> রাত ১০:০০-এ <b>উদয়ন এক্সপ্রেস</b> ট্রেন ছাড়বে।</li>
+      <li><b>জাহাজ ঘাট ও টেকনাফ রুট:</b> টেকনাফ নাফ নদী রুট বন্ধ। জাহাজ ছাড়বে কক্সবাজার শহরের <b>নুনিয়াছড়া বিআইডব্লিউটিএ ঘাট</b> থেকে (সকাল ৬:০০-তে হোটেল থেকে ঘাটে রওনা, ৭:০০-তে জাহাজে যাত্রা)।</li>
+      <li><b>সেন্টমার্টিন রাত্রিযাপন:</b> পরিবেশ মন্ত্রণালয়ের ২৭ অক্টোবরের প্রজ্ঞাপন অনুযায়ী পুরো নভেম্বর মাসেই রাত্রিযাপন অনুমোদিত।</li>
+      <li><b>ট্রাভেল পাস ও পরিচয়পত্র:</b> সবার মোবাইলে অনলাইন QR কোড ট্রাভেল পাস ও ৳১০০ ফি রসিদ এবং সাথে আসল <b>স্টুডেন্ট আইডি ও NID</b> থাকা বাধ্যতামূলক।</li>
+    </ul>
+  </div>
+
+  <!-- Live Weather Radar Bar -->
+  <div class="card" style="background: #f0fdf4; border-color: #bbf7d0;">
+    <div class="card-title" style="color: #166534;">🌤️ স্পটভিত্তিক নির্ভরযোগ্য আবহাওয়া ও লাইভ রাডার</div>
+    <p style="font-size: 0.85rem; color: #15803d; margin-bottom: 8px;">
+      <b>২২–২৩ নভেম্বর:</b> ঘূর্ণিঝড় 'আকভান' পরবর্তী প্রভাবে মিরিঞ্জা ও কক্সবাজারে হালকা গুঁড়ি গুঁড়ি বৃষ্টি (৮-১৫ মিমি) হতে পারে।<br>
+      <b>২৪–২৭ নভেম্বর:</b> সেন্টমার্টিনে চমৎকার রোদেলা আকাশ (বৃষ্টি ০ মিমি), রাতে ঠান্ডা সাগর হাওয়া (১৮°-২০°সে.)।
+    </p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <a href="https://www.google.com/search?q=weather+Lama+Bandarban+Bangladesh" target="_blank" class="contact-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;">🌦️ মিরিঞ্জা/লামা ওয়েদার</a>
+      <a href="https://www.google.com/search?q=weather+Coxs+Bazar+Bangladesh" target="_blank" class="contact-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;">🏖️ কক্সবাজার ওয়েদার</a>
+      <a href="https://www.google.com/search?q=weather+Saint+Martin+Island+Bangladesh" target="_blank" class="contact-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;">🌊 সেন্টমার্টিন সি-ওয়েদার</a>
+      <a href="http://live4.bmd.gov.bd/" target="_blank" class="contact-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;">📡 বিএমডি (BMD) বুলেটিন</a>
+    </div>
+  </div>
+
+  <!-- Quick Action Dial Bar & Coordinators -->
+  <div class="card">
+    <div class="card-title">👥 ট্যুর কোঅর্ডিনেটর ও টিম লিডস</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <a href="tel:01707226697" class="contact-btn">📞 জাহিদ: 01707-226697</a>
+      <a href="tel:+8801886373999" class="contact-btn">📞 সাজেদ ইমরান: 01886-373999</a>
+      <a href="tel:01518904986" class="contact-btn">📞 ফয়সাল: 01518-904986</a>
+      <a href="tel:+8801872959460" class="contact-btn">📞 মুকতাদির: 01872-959460</a>
+      <a href="tel:+8801839903963" class="contact-btn">📞 অর্ঘ কানুনগো: 01839-903963</a>
+      <span class="contact-btn" style="background:#f8fafc; color:#475569; border-color:#cbd5e1;">👥 তন্ময় (টিম লিড)</span>
+    </div>
+  </div>
+
+  <!-- Emergency Helplines -->
+  <div class="card">
+    <div class="card-title">🚨 জরুরি সরকারি হেল্পলাইন</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <a href="tel:999" class="contact-btn emergency">🚨 জাতীয় জরুরি (999)</a>
+      <a href="tel:+8801320160160" class="contact-btn">👮 ট্যুরিস্ট পুলিশ</a>
+      <a href="tel:+8801769440999" class="contact-btn">⚓ কোস্টগার্ড (সেন্টমার্টিন)</a>
+      <a href="tel:+8801320108250" class="contact-btn">🏔️ লামা থানা (মিরিঞ্জা)</a>
+    </div>
+  </div>
+
+  <!-- Day by Day Roadmap -->
+  <div class="card">
+    <div class="card-title">🗺️ ভ্রমণ রোডম্যাপ ও সময়সূচি</div>
+
+    <div class="timeline-item">
+      <span class="day-badge">Day 0 • ২১ নভেম্বর (বৃহস্পতিবার রাত) • সিলেট থেকে যাত্রা</span>
+      <p><b>ভার্সিটি গেট (SUST Main Gate):</b> রাত ৮:৩০-এ বাস ছাড়বে (লেট করলে নিজ দায়িত্বে)।<br>
+      <b>সিলেট রেলওয়ে স্টেশন:</b> রাত ১০:০০-এ উদয়ন এক্সপ্রেস ট্রেন ছাড়বে।</p>
+      <div style="font-size: 0.82rem; color: #0284c7; margin: 3px 0;">🌤️ পূর্বাভাস: তাপমাত্রা [২২°–২৬°সে.], আকাশ আংশিক মেঘলা।</div>
+      <a class="spot-link" href="https://maps.google.com/?q=Sylhet+Railway+Station" target="_blank">📍 সিলেট রেলস্টেশন ম্যাপ</a>
+    </div>
+
+    <div class="timeline-item">
+      <span class="day-badge">Day 1 • ২২ নভেম্বর (শুক্রবার) • চট্টগ্রাম ➔ মিরিঞ্জা ভ্যালি</span>
+      <p><b>সকাল ৬:৩০–৭:০০:</b> চট্টগ্রাম পৌঁছানো (ইনশাআল্লাহ)।<br>
+      <b>সকাল ৭:০০–৮:০০:</b> নাস্তা গ্রহণ ➔ <b>সকাল ৮:০০:</b> বাস ছাড়বে চকরিয়ার উদ্দেশ্যে।<br>
+      <b>দুপুর ১২:০০:</b> মিরিঞ্জা ভ্যালি রিসোর্টে চেক-ইন ➔ ঘোরাঘুরি, পাহাড়ি মেঘ ও সূর্যাস্ত উপভোগ। (দুপুরের খাবার, বিকেলের নাস্তা ও রাতের খাবার অন্তর্ভুক্ত)।</p>
+      <div style="font-size: 0.82rem; color: #b45309; margin: 3px 0;">🌦️ পূর্বাভাস: তাপমাত্রা [২২°–২৭°সে.], গুঁড়ি গুঁড়ি বৃষ্টি [~১০.৮ মিমি, সম্ভাবনা ৮২%], পাহাড়ি কুয়াশা ও পিচ্ছিল ট্রেইল।</div>
+      <a class="spot-link" href="https://maps.google.com/?q=Mirinja+Valley+Lama+Bandarban" target="_blank">📍 মিরিঞ্জা ভ্যালি গুগল ম্যাপ</a>
+    </div>
+
+    <div class="timeline-item">
+      <span class="day-badge">Day 2 • ২৩ নভেম্বর (শনিবার) • মিরিঞ্জা ➔ কক্সবাজার</span>
+      <p><b>সকালে:</b> নাস্তা গ্রহণ ও রিসোর্ট চেক-আউট ➔ <b>সকাল ১০:৩০:</b> মিরিঞ্জা থেকে চকরিয়া রওনা।<br>
+      <b>চকরিয়া ➔ কক্সবাজার:</b> পৌঁছে দুপুরের খাবার গ্রহণ ➔ <b>Hotel Hyperion (সুগন্ধা পয়েন্ট)</b>-এ ৫টি এসি ফ্ল্যাটে চেক-ইন ও বিশ্রাম।<br>
+      <b>বিকেল ও রাত:</b> সমুদ্রে সূর্যাস্ত দেখা, সৈকত ভ্রমণ ও রাতের খাবার।</p>
+      <div style="font-size: 0.82rem; color: #b45309; margin: 3px 0;">🌦️ পূর্বাভাস: তাপমাত্রা [২৩°–২৮°সে.], হালকা বৃষ্টির সম্ভাবনা [~৭.৮ মিমি, সম্ভাবনা ৬৯%], সাগর মৃদু উত্তাল।</div>
+      <a class="spot-link" href="https://maps.google.com/?q=Hotel+Hyperion+Sugandha+Point+Coxs+Bazar" target="_blank">📍 হোটেল হাইপেরিয়ন ম্যাপ</a>
+    </div>
+
+    <div class="timeline-item">
+      <span class="day-badge">Day 3 • ২৪ নভেম্বর (রবিবার) • কক্সবাজার ➔ সেন্টমার্টিন</span>
+      <p><b>সকাল ৬:০০:</b> হোটেল থেকে নুনিয়াছড়া ঘাটের উদ্দেশ্যে রওনা (দেরি করা যাবে না)।<br>
+      <b>সকাল ৭:০০:</b> নুনিয়াছড়া ঘাট থেকে জাহাজে সেন্টমার্টিনের উদ্দেশ্যে যাত্রা।<br>
+      <b>দুপুর ১:৩০:</b> দ্বীপে পৌঁছে রিসোর্টে চেক-ইন (১০টি ডাবল রুম) ➔ সৈকত ভ্রমণ ও নীল জলের সৌন্দর্য উপভোগ।</p>
+      <div style="font-size: 0.82rem; color: #15803d; margin: 3px 0;">☀️ পূর্বাভাস: তাপমাত্রা [২৩°–৩০°সে.], চমৎকার রোদেলা দিন [বৃষ্টিপাত ০.০ মিমি, সম্ভাবনা ১৪%], সাগর শান্ত।</div>
+      <a class="spot-link" href="https://maps.google.com/?q=BIWTA+Ghat+Nuniachhara+Coxs+Bazar" target="_blank">📍 নুনিয়াছড়া ঘাট ম্যাপ</a>
+    </div>
+
+    <div class="timeline-item">
+      <span class="day-badge">Day 4 • ২৫ নভেম্বর (সোমবার) • সেন্টমার্টিন পূর্ণ দিন</span>
+      <p><b>সকালে:</b> সাগরে সূর্যোদয় দর্শন ও নাস্তা ➔ সাইক্লিং, ডাব ও সামুদ্রিক তাজা মাছ খাওয়া, নির্ভার অবসর।<br>
+      <b>বিকেল ও রাত:</b> পশ্চিম বিচে সূর্যাস্ত দেখা ➔ রাতে রিসোর্টে অবস্থান ও আড্ডা। (ছেঁড়াদ্বীপে যাওয়া পরিবেশ বিধিমতে নিষিদ্ধ)।</p>
+      <div style="font-size: 0.82rem; color: #15803d; margin: 3px 0;">☀️ পূর্বাভাস: তাপমাত্রা [২২°–২৯°সে.], পরিষ্কার সুনীল আকাশ [বৃষ্টিপাত ০.০ মিমি, সম্ভাবনা ২%], রাতে ঠান্ডা হাওয়া (২১°সে.)।</div>
+      <a class="spot-link" href="https://maps.google.com/?q=Saint+Martin+Island+Bangladesh" target="_blank">📍 সেন্টমার্টিন ম্যাপ</a>
+    </div>
+
+    <div class="timeline-item">
+      <span class="day-badge">Day 5 • ২৬ নভেম্বর (মঙ্গলবার) • সেন্টমার্টিন ➔ কক্সবাজার</span>
+      <p><b>সকাল ১১:৩০:</b> সেন্টমার্টিন রিসোর্ট চেক-আউট ➔ <b>বিকেল ৩:০০:</b> জাহাজ কক্সবাজারের উদ্দেশ্যে ছাড়বে।<br>
+      <b>রাত ১০:০০:</b> কক্সবাজারে পৌঁছানো ➔ হোটেল হাইপেরিয়নে (সুগন্ধা পয়েন্ট) রাত্রিযাপন ও রাতের খাবার।</p>
+      <div style="font-size: 0.82rem; color: #15803d; margin: 3px 0;">☀️ পূর্বাভাস: সেন্টমার্টিন [২০°–২৮°সে.] ➔ কক্সবাজার [২০°–২৭°সে.], শুষ্ক ও পরিষ্কার আকাশ [বৃষ্টি ০ মিমি]।</div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="day-badge">Day 6 • ২৭ নভেম্বর (বুধবার) • কক্সবাজার ➔ চট্টগ্রাম ➔ সিলেট</span>
+      <p><b>সকালে:</b> নাস্তা গ্রহণ ও হোটেল চেক-আউট ➔ <b>দুপুর ১২:৩০:</b> কক্সবাজার এক্সপ্রেস ট্রেনে চট্টগ্রামের উদ্দেশ্যে রওনা।<br>
+      <b>চট্টগ্রামে:</b> পৌঁছে দুপুরের খাবার ও সন্ধ্যায় রাতের খাবার ➔ <b>রাত ৯:৩০:</b> উদয়ন এক্সপ্রেস ট্রেনে সিলেটের উদ্দেশ্যে যাত্রা।</p>
+      <div style="font-size: 0.82rem; color: #0284c7; margin: 3px 0;">🌤️ পূর্বাভাস: তাপমাত্রা [১৯°–২৮°সে.], মনোরম ভ্রমণের আবহাওয়া।</div>
+    </div>
+
+    <div class="timeline-item" style="border-left: none; padding-bottom: 0;">
+      <span class="day-badge">Day 7 • ২৮ নভেম্বর (বৃহস্পতিবার সকাল) • সিলেটে প্রত্যাবর্তন</span>
+      <p><b>ভোর/সকালে:</b> সিলেটে সফলভাবে পৌঁছানো (ইনশাআল্লাহ) ➔ ট্যুর সমাপ্তি ও নিজ নিজ হলে ফেরা।</p>
+    </div>
+  </div>
+
+  <!-- Rules & Dos/Don'ts -->
+  <div class="card" style="border-left: 4px solid var(--primary);">
+    <div class="card-title">⚠️ ট্যুর নির্দেশনা ও নিয়মাবলী (Instructions for Tour)</div>
+    <div style="margin-bottom: 8px;">
+      <strong style="color: var(--primary);">✅ অবশ্যই পালনীয় (Do's):</strong>
+      <ul style="padding-left: 18px; font-size: 0.88rem; line-height: 1.5; margin-top: 4px;">
+        <li><b>শিডিউল মেনে চলুন:</b> নির্ধারিত সময় কঠোরভাবে মেনে চলুন; অনর্থক সময় নষ্ট করবেন না।</li>
+        <li><b>অনুমতি ও যোগাযোগ:</b> কাউকে অথবা সম্মানিত শিক্ষককে না জানিয়ে কখনো কোথাও যাবেন না বা দলছুট হবেন না।</li>
+        <li><b>ব্যাগ হালকা রাখুন:</b> ট্র্যাকিং ও জাহাজে চলাচলের সুবিধার্থে ব্যাগ যথাসম্ভব হালকা রাখুন।</li>
+        <li><b>খাবার পানি:</b> সব সময় ব্যাকপ্যাকে পর্যাপ্ত খাবার পানির বোতল রাখুন।</li>
+        <li><b>জরুরি অতিরিক্ত টাকা:</b> অন্তত ৩,০০০–৪,০০০ টাকা ক্যাশ ইমার্জেন্সি ব্যাকআপ হিসেবে সাথে রাখুন।</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="color: var(--danger);">❌ যা একদমই করবেন না (Don'ts):</strong>
+      <ul style="padding-left: 18px; font-size: 0.88rem; line-height: 1.5; margin-top: 4px;">
+        <li><b>নো হাই হিল (No High Heels):</b> পাহাড়ি রাস্তা ও প্রবালে হাঁটতে হবে; হিল জুতো পরলে গোড়ালি মচকে যাওয়ার (tweak ankle) চরম ঝুঁকি রয়েছে। আরামদায়ক গ্রিপ স্যান্ডেল বা স্নিকার্স পরুন।</li>
+        <li><b>অপ্রীতিকর আচরণ নয়:</b> এমন কিছু করবেন না বা অপ্রয়োজনীয় দৃষ্টি আকর্ষণ করবেন না যা ট্যুরের পরিবেশ ব্যাহত করে।</li>
+        <li><b>পরিবেশ ও রাতকালীন বিধিনিষেধ:</b> পলিথিন বহন নিষেধ। দ্বীপে রাতে সাউন্ডবক্স ও তীব্র সার্চলাইট নিষিদ্ধ।</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Packing Checklist -->
+  <div class="card">
+    <div class="card-title">🎒 প্যাকিং ও প্রস্তুতি চেকলিস্ট (Tap to Check)</div>
+    <div class="check-item"><input type="checkbox"> <span><b>জাহাজের টিকিট ও অনলাইন ট্রাভেল পাস (QR Code):</b> অফলাইনে ডাউনলোড/স্ক্রিনশট সংরক্ষণ</span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>সেন্টমার্টিন পরিবেশ উন্নয়ন ফি (৳১০০):</b> পেমেন্ট রসিদ বা কনফার্মেশন কপি</span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>NID / পাসপোর্ট / জন্ম সনদের ফটোকপি ও আসল স্টুডেন্ট আইডি</b></span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>ছাতা (Umbrella):</b> রোদ ও বৃষ্টির হাত থেকে বাঁচতে</span></div>
+    <div class="check-item"><input type="checkbox" checked> <span><b>ওডোমস ক্রিম (Odomos):</b> মশা ও পোকা প্রতিরোধে</span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>ওয়ার্ম জ্যাকেট / হুডি:</b> রাতের ঠান্ডা সাগরের হাওয়া ও পাহাড়ে</span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>মোজা (Socks for Coral):</b> সেন্টমার্টিনে প্রবালের ধারালো আঘাত থেকে পা সুরক্ষায়</span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>হালকা ব্যাকপ্যাক ও খাবার পানির বোতল</b></span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>আরামদায়ক গ্রিপ স্যান্ডেল / স্নিকার্স (নো হাই হিল)</b></span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>জরুরি ক্যাশ টাকা (৳৩,০০০–৳৪,০০০)</b></span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>পাওয়ার ব্যাংক ও মাল্টিপ্লাগ</b> (লোডশেডিং ব্যাকআপ)</span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>মোবাইল ওয়াটারপ্রুফ পাউচ:</b> <b>(জরুরিতে একটি ছোট স্বচ্ছ পলিথিনও ব্যবহার করা যেতে পারে)</b></span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>ফার্স্ট এইড ও ওষুধ:</b> স্যালাইন, প্যারাসিটামল, অ্যান্টাসিড, বমির ওষুধ <b>(কিছু ওষুধ SUST মেডিক্যাল সেন্টার থেকেও নেওয়া আছে ব্যাকআপ হিসেবে)</b></span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>সানগ্লাস ও সানস্ক্রিন (SPF 50+)</b></span></div>
+    <div class="check-item"><input type="checkbox"> <span><b>*অন্যান্য প্রয়োজনীয় জিনিসপত্র (ব্যক্তিগত রুচি/প্রয়োজন অনুযায়ী)</b></span></div>
+  </div>
+
+  <!-- Compiler Footer -->
+  <div class="card" style="text-align: center; font-size: 0.85rem; background: #f8fafc;">
+    <div style="font-size: 0.78rem; color: var(--text-muted);">রোডম্যাপ প্রস্তুত ও কম্পাইলেশন:</div>
+    <div style="margin: 3px 0;">
+      <a href="https://ashiq-sm.github.io/portfolio" target="_blank" style="font-weight: 700; color: var(--primary); text-decoration: none; font-size: 0.95rem;">
+        এস. এম. আশিকুর রহমান (SM Ashikur Rahman)
+      </a>
+    </div>
+    <div style="color: var(--text-muted); font-size: 0.8rem;">
+      জেনেটিক ইঞ্জিনিয়ারিং অ্যান্ড বায়োটেকনোলজি (GEB), SUST &nbsp;•&nbsp; 
+      <a href="https://wa.me/+8801773971905" target="_blank" style="color: var(--success); font-weight: 600; text-decoration: none;">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Print & PDF button -->
+  <div style="text-align: center; margin-top: 10px; display: flex; gap: 8px; justify-content: center;" class="no-print">
+    <a href="tour_roadmap_mobile.pdf" download="tour_roadmap_mobile.pdf" style="display: inline-block; background: #0369a1; color: white; border: none; padding: 12px 18px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+      📥 Download PDF
+    </a>
+    <button onclick="window.print()" style="background: var(--primary); color: white; border: none; padding: 12px 18px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+      📄 Print / Save PDF
+    </button>
+  </div>
+
+  <script>
+    // Persist checklist state in browser localStorage
+    const checkboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+    checkboxes.forEach((cb, idx) => {
+      const saved = localStorage.getItem('tour_check_' + idx);
+      if (saved !== null) cb.checked = saved === 'true';
+      cb.addEventListener('change', () => {
+        localStorage.setItem('tour_check_' + idx, cb.checked);
+      });
+    });
+  </script>
+
+</div>
+
+</body>
+</html>
