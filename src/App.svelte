@@ -258,15 +258,23 @@
   <div class="header-top-row">
     <div class="header-bismillah">{tourData.meta.bismillah}</div>
     <div class="header-top-actions">
-      <!-- Live Viewers Pulse Indicator -->
+      <!-- Live Viewers Pulse Indicator (Premium 3-person community squad with radiant signal) -->
       <div
         class="live-viewer-pill"
         title="লাইভ একটিভ ভিউয়ার্স ({liveViewerCount})"
         aria-label="Live Active Viewers"
       >
         <span class="live-pulse-dot"></span>
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="live-viewer-icon">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="live-viewer-icon">
+          <!-- Center lead person -->
+          <circle cx="12" cy="7" r="3.2"/>
+          <path d="M12 11.8c-3 0-5.8 1.5-5.8 3.6v1.4h11.6v-1.4c0-2.1-2.8-3.6-5.8-3.6z"/>
+          <!-- Left companion -->
+          <circle cx="5.5" cy="8.5" r="2.4" opacity="0.8"/>
+          <path d="M5.5 12.2c-1.8 0-3.5.9-3.5 2.2v1h3.2v-1.2c0-.7.3-1.4.8-2-.2 0-.3 0-.5 0z" opacity="0.8"/>
+          <!-- Right companion -->
+          <circle cx="18.5" cy="8.5" r="2.4" opacity="0.8"/>
+          <path d="M18.5 12.2c.2 0 .3 0 .5 0 .5.6.8 1.3.8 2v1.2H23v-1c0-1.3-1.7-2.2-3.5-2.2z" opacity="0.8"/>
         </svg>
       </div>
 
