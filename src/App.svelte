@@ -27,6 +27,41 @@
   let canScrollDown = $state(true);
   let scrollNavTimer = null;
 
+  // Viewers Long-Press handler
+  let viewerPressTimer = null;
+  let viewerPressTriggered = false;
+
+  function handleViewerTouchStart(e) {
+    viewerPressTriggered = false;
+    viewerPressTimer = setTimeout(() => {
+      viewerPressTriggered = true;
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try { navigator.vibrate([40, 30, 40]); } catch {}
+      }
+      isViewersOpen = true;
+    }, 450); // 450ms long-press required
+  }
+
+  function handleViewerTouchMove(e) {
+    if (viewerPressTimer) {
+      clearTimeout(viewerPressTimer);
+      viewerPressTimer = null;
+    }
+  }
+
+  function handleViewerTouchEnd(e) {
+    if (viewerPressTimer) {
+      clearTimeout(viewerPressTimer);
+      viewerPressTimer = null;
+    }
+  }
+
+  // Desktop right-click / contextmenu long-press equivalent
+  function handleViewerContextMenu(e) {
+    e.preventDefault();
+    isViewersOpen = true;
+  }
+
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -260,12 +295,16 @@
   <div class="header-top-row">
     <div class="header-bismillah">{tourData.meta.bismillah}</div>
     <div class="header-top-actions">
-      <!-- Live Viewers Pulse Indicator (Click or Long-Press to view details & options) -->
+      <!-- Live Viewers Pulse Indicator (Details & Options ONLY on Long-Press / Right-Click) -->
       <button
         class="live-viewer-pill"
-        onclick={() => { isViewersOpen = true; }}
-        title="লাইভ একটিভ ভিউয়ার্স বিস্তারিত ও শেয়ার ({liveViewerCount})"
-        aria-label="Live Active Viewers Details"
+        ontouchstart={handleViewerTouchStart}
+        ontouchmove={handleViewerTouchMove}
+        ontouchend={handleViewerTouchEnd}
+        ontouchcancel={handleViewerTouchEnd}
+        oncontextmenu={handleViewerContextMenu}
+        title="লাইভ একটিভ ভিউয়ার্স ({liveViewerCount}) — চেপে ধরে রাখলে বিস্তারিত ও অপশনস দেখা যাবে"
+        aria-label="Live Active Viewers (Long press for details)"
       >
         <span class="live-pulse-dot"></span>
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="live-viewer-icon">
