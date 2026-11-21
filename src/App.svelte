@@ -8,6 +8,7 @@
   import Checklist from './components/Checklist.svelte';
   import ContactsGrid from './components/ContactsGrid.svelte';
   import AuthorPortal from './components/AuthorPortal.svelte';
+  import InstallPrompt from './components/InstallPrompt.svelte';
 
   let activeSpotId = $state(tourData.spots[0]?.id || 'sylhet');
   let loadedSpotIds = $state(new Set([tourData.spots[0]?.id || 'sylhet', tourData.spots[1]?.id || 'mirinja']));
@@ -190,3 +191,5 @@
 {#if toastVisible}
   <div class="share-toast">লিংক কপি হয়েছে! সবার সাথে শেয়ার করুন।</div>
 {/if}
+
+<InstallPrompt />
