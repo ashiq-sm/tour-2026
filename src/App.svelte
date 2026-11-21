@@ -10,6 +10,7 @@
   import AuthorPortal from './components/AuthorPortal.svelte';
   import InstallPrompt from './components/InstallPrompt.svelte';
   import SettingsModal from './components/SettingsModal.svelte';
+  import ViewersModal from './components/ViewersModal.svelte';
   import { initMobileLongPressTooltips } from './utils/mobileTooltip';
 
   let activeSpotId = $state(tourData.spots[0]?.id || 'sylhet');
@@ -17,6 +18,7 @@
   let bgSubIndex = $state(0);
   let toastVisible = $state(false);
   let isSettingsOpen = $state(false);
+  let isViewersOpen = $state(false);
   let liveViewerCount = $state(18);
 
   // Floating thumb scroll-nav indicators
@@ -258,11 +260,12 @@
   <div class="header-top-row">
     <div class="header-bismillah">{tourData.meta.bismillah}</div>
     <div class="header-top-actions">
-      <!-- Live Viewers Pulse Indicator (Premium 3-person community squad with radiant signal) -->
-      <div
+      <!-- Live Viewers Pulse Indicator (Click or Long-Press to view details & options) -->
+      <button
         class="live-viewer-pill"
-        title="লাইভ একটিভ ভিউয়ার্স ({liveViewerCount})"
-        aria-label="Live Active Viewers"
+        onclick={() => { isViewersOpen = true; }}
+        title="লাইভ একটিভ ভিউয়ার্স বিস্তারিত ও শেয়ার ({liveViewerCount})"
+        aria-label="Live Active Viewers Details"
       >
         <span class="live-pulse-dot"></span>
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="live-viewer-icon">
@@ -276,7 +279,7 @@
           <circle cx="18.5" cy="8.5" r="2.4" opacity="0.8"/>
           <path d="M18.5 12.2c.2 0 .3 0 .5 0 .5.6.8 1.3.8 2v1.2H23v-1c0-1.3-1.7-2.2-3.5-2.2z" opacity="0.8"/>
         </svg>
-      </div>
+      </button>
 
       <!-- Settings Button -->
       <button
@@ -642,4 +645,10 @@
   bgDim={appSettings.bgDim}
   onClose={() => { isSettingsOpen = false; }}
   onUpdate={updateSettings}
+/>
+
+<ViewersModal
+  isOpen={isViewersOpen}
+  viewerCount={liveViewerCount}
+  onClose={() => { isViewersOpen = false; }}
 />
