@@ -11,6 +11,7 @@
   import InstallPrompt from './components/InstallPrompt.svelte';
   import SettingsModal from './components/SettingsModal.svelte';
   import ViewersModal from './components/ViewersModal.svelte';
+  import PrayerTimesModal from './components/PrayerTimesModal.svelte';
   import { initMobileLongPressTooltips } from './utils/mobileTooltip';
 
   let activeSpotId = $state(tourData.spots[0]?.id || 'sylhet');
@@ -19,6 +20,7 @@
   let toastVisible = $state(false);
   let isSettingsOpen = $state(false);
   let isViewersOpen = $state(false);
+  let isPrayerOpen = $state(false);
   let liveViewerCount = $state(18);
 
   // Floating thumb scroll-nav indicators
@@ -407,6 +409,7 @@
           showTrans={appSettings.showDuaTrans}
           showMeaning={appSettings.showDuaMeaning}
           onOpenSettings={() => { isSettingsOpen = true; }}
+          onOpenPrayer={() => { isPrayerOpen = true; }}
         />
       </div>
     {/if}
@@ -684,10 +687,17 @@
   bgDim={appSettings.bgDim}
   onClose={() => { isSettingsOpen = false; }}
   onUpdate={updateSettings}
+  onOpenPrayer={() => { isPrayerOpen = true; }}
 />
 
 <ViewersModal
   isOpen={isViewersOpen}
   viewerCount={liveViewerCount}
   onClose={() => { isViewersOpen = false; }}
+/>
+
+<PrayerTimesModal
+  isOpen={isPrayerOpen}
+  selectedLocationId={activeSpotId}
+  onClose={() => { isPrayerOpen = false; }}
 />

@@ -8,7 +8,8 @@
     showDuaTrans = true,
     bgDim = 'medium',
     onClose = () => {},
-    onUpdate = () => {}
+    onUpdate = () => {},
+    onOpenPrayer = () => {}
   } = $props();
 
   function setFontSize(val) {
@@ -142,6 +143,24 @@
               গাঢ় (টেক্সট ফোকাস)
             </button>
           </div>
+        </div>
+
+        <!-- Prayer & Waqt Times Quick Launcher -->
+        <div class="setting-group">
+          <div class="setting-label">🕌 আজান ও নামাজের সময়সূচী</div>
+          <div class="prayer-settings-card">
+            <div class="prayer-settings-info">
+              <strong>সফরকালীন ৫ ওয়াক্তের সময় ও তায়াম্মুম</strong>
+              <span>সিলেট ➔ চট্টগ্রাম ➔ লামা/মিরিঞ্জা ➔ কক্সবাজার ➔ সেন্টমার্টিন</span>
+            </div>
+            <button
+              class="prayer-open-btn"
+              onclick={() => { onClose(); onOpenPrayer(); }}
+            >
+              ওয়াক্ত সূচি খুলুন ➔
+            </button>
+          </div>
+          <div class="setting-hint">চলন্ত গাড়ি ও জাহাজে তায়াম্মুমের মাসআলা এবং অফলাইন চার্ট দেখতে পাবেন।</div>
         </div>
 
         <!-- Dua Card View Customization -->
@@ -354,6 +373,50 @@
   .toggle-checkbox-text span {
     font-size: 0.72rem;
     color: #94a3b8;
+  }
+
+  .prayer-settings-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+
+  .prayer-settings-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .prayer-settings-info strong {
+    font-size: 0.84rem;
+    color: #38bdf8;
+  }
+
+  .prayer-settings-info span {
+    font-size: 0.72rem;
+    color: #cbd5e1;
+  }
+
+  .prayer-open-btn {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9);
+    color: #ffffff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+
+  .prayer-open-btn:hover {
+    opacity: 0.9;
   }
 
   .settings-footer {

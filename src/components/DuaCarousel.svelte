@@ -1,7 +1,10 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
 
-  let { duas = [] } = $props();
+  let {
+    duas = [],
+    onOpenPrayer = () => {}
+  } = $props();
 
   let current = $state(0);
   let showInfo = $state(false);
@@ -62,14 +65,24 @@
     <div class="dua-badge-title">
       <span>{duas[current]?.title}</span>
     </div>
-    <button
-      class="dua-info-btn"
-      onclick={openInfo}
-      title="হাদিস ও বিস্তারিত দেখুন"
-      aria-label="হাদিস ও বিস্তারিত দেখুন"
-    >
-      i
-    </button>
+    <div class="dua-header-actions">
+      <button
+        class="dua-prayer-btn"
+        onclick={onOpenPrayer}
+        title="নামাজের ওয়াক্ত ও আজান সূচি দেখুন"
+        aria-label="নামাজের ওয়াক্ত ও আজান সূচি দেখুন"
+      >
+        🕌 ওয়াক্ত
+      </button>
+      <button
+        class="dua-info-btn"
+        onclick={openInfo}
+        title="হাদিস ও বিস্তারিত দেখুন"
+        aria-label="হাদিস ও বিস্তারিত দেখুন"
+      >
+        i
+      </button>
+    </div>
   </div>
 
   <div
