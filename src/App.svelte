@@ -7,7 +7,8 @@
   import ContactsGrid from './components/ContactsGrid.svelte';
   import AuthorPortal from './components/AuthorPortal.svelte';
 
-  let activeSpotId = $state('sylhet');
+  let activeSpotId = $state(tourData.spots[0]?.id || 'sylhet');
+  let bgSubIndex = $state(0);
   let toastVisible = $state(false);
 
   async function shareApp() {
@@ -32,29 +33,69 @@
   }
 
   onMount(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('data-spot');
-            if (id) activeSpotId = id;
-          }
-        }
-      },
-      { threshold: 0.3 }
-    );
+    let ticking = false;
 
-    document.querySelectorAll('.spot-section').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    function updateActiveSpot() {
+      const targetY = window.innerHeight * 0.45;
+      const sections = document.querySelectorAll('.spot-section');
+      let bestId = activeSpotId;
+      let bestDist = Infinity;
+
+      for (const el of sections) {
+        const rect = el.getBoundingClientRect();
+        // If section spans across targetY, distance is 0
+        let dist = 0;
+        if (rect.top > targetY) dist = rect.top - targetY;
+        else if (rect.bottom < targetY) dist = targetY - rect.bottom;
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestId = el.getAttribute('data-spot') || bestId;
+        }
+      }
+
+      if (bestId !== activeSpotId) {
+        activeSpotId = bestId;
+        bgSubIndex = 0;
+      }
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateActiveSpot);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateActiveSpot();
+
+    // Softly cycle green/water landscape photos within the active spot every 6s
+    const cycleTimer = setInterval(() => {
+      const spot = tourData.spots.find((s) => s.id === activeSpotId);
+      const count = spot?.sceneImgs?.length || 1;
+      if (count > 1) {
+        bgSubIndex = (bgSubIndex + 1) % count;
+      }
+    }, 6000);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      clearInterval(cycleTimer);
+    };
   });
 </script>
 
-<!-- Dynamic Transparent Scenic Backgrounds on Scroll -->
+<!-- Dynamic Transparent Green & Water Scenic Backgrounds per Spot -->
 {#each tourData.spots as spot (spot.id)}
-  <div
-    class="bg-scene {activeSpotId === spot.id ? 'bg-active' : ''}"
-    style="background-image: url('{spot.sceneImg}');"
-  ></div>
+  {#each spot.sceneImgs as img, idx (img)}
+    <div
+      class="bg-scene {activeSpotId === spot.id && (bgSubIndex % spot.sceneImgs.length) === idx ? 'bg-active' : ''}"
+      style="background-image: url('{img}');"
+    ></div>
+  {/each}
 {/each}
 <div id="bg-overlay"></div>
 
