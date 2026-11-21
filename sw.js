@@ -1,4 +1,4 @@
-const CACHE_NAME = 'studytour-v2';
+const CACHE_NAME = 'studytour-v3';
 const ASSETS = [
   './',
   './index.html',
